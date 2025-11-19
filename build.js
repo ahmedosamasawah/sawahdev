@@ -1,11 +1,11 @@
+import { load_blog_posts } from './blog.js'
+import { build_client_assets } from './client-build.js'
 import { clean_dist } from './fs-utils.js'
 import { load_i18n } from './i18n.js'
-import { load_blog_posts } from './blog.js'
 import { build_manifest, write_manifest } from './manifest.js'
-import { build_client_assets } from './client-build.js'
-import { ssg_routes } from './ssg.js'
 import { generate_og_images } from './og.js'
 import { generate_sitemap_and_robots } from './sitemap.js'
+import { ssg_routes } from './ssg.js'
 
 async function main() {
   try {
