@@ -1,0 +1,52 @@
+pre-commit:
+  commands:
+    eslint:
+      glob: "*.{js,ts,svelte}"
+      run: pnpm exec eslint --concurrency auto --fix {staged_files}
+      stage_fixed: true
+
+    prettier:
+      glob: "*.{js,ts,svelte,html,css}"
+      run: pnpm exec prettier --write {staged_files}
+      stage_fixed: true
+
+    lint:
+      glob: "*.py"
+      run: uv run ruff check --fix {staged_files}
+      stage_fixed: true
+
+    fmt:
+      glob: "*.py"
+      run: uv run ruff format {staged_files}
+      stage_fixed: true
+
+    check-eof-newline:
+      file_types: 
+      - text
+      run: '! rg -lU "[^\n]\z" {staged_files}'
+
+    check-trailing-ws:
+      file_types: 
+      - text
+      run: '! rg "\s+$" {staged_files}'
+
+    check-camel-case:
+      glob: "*.{js,svelte}"
+      run: '! rg -q "\\b(?:let|const)[ \t]+[a-z][a-z0-9]*[A-Z][A-Za-z0-9_]*" {staged_files}'
+
+    check-brace-in-attrs:
+      glob: "*.svelte"
+      run: '! rg "=\\{[\`'']" {staged_files}'
+
+post-merge:
+  parallel: true
+  commands:
+    install-client-deps:
+      files: git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD
+      glob: pnpm-lock.yaml
+      run: pnpm install
+
+    install-server-deps:
+      files: git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD
+      glob: uv.lock
+      run: uv sync --inexact
