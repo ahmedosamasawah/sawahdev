@@ -1,0 +1,27 @@
+{
+  "common": {
+    "siteTitle": "Ahmed Osama | Software Engineer",
+    "nav": {
+      "home": "Home",
+      "projects": "Projects",
+      "blog": "Blog",
+      "about": "About"
+    }
+  },
+  "home": {
+    "heroTitle": "I build reliable software.",
+    "heroIntro": "Focused on clean code, clear structure, and practical user experience."
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "A selection of work I’ve built over the years."
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Technical notes and thoughts from day-to-day development."
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "A software engineer who values clarity, maintainability, and real-world problem-solving."
+  }
+}
