@@ -1,0 +1,19 @@
+[tools]
+node = 'latest'
+pnpm = 'latest'
+uv = 'latest'
+lefthook = 'latest'
+
+[tasks.svcheck]
+run = '''
+uv run https://raw.githubusercontent.com/mustafa0x/util/main/svcheck.py
+CHANGED=$(git diff --diff-filter=d --name-only HEAD)
+[ -z "$CHANGED" ] || pnpm exec eslint --fix $CHANGED
+'''
+
+[tasks.dev]
+run = 'pnpm dev'
+alias = 'default'
+
+[tasks.build]
+run = 'pnpm build'

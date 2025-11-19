@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 pnpm-lock.yaml
-
+pnpm-workspace.yaml

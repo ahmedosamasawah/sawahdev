@@ -1,0 +1,72 @@
+{
+  "locales": ["en", "ar"],
+  "defaultLocale": "en",
+  "routes": [
+    {
+      "id": "home-en",
+      "locale": "en",
+      "type": "page",
+      "name": "home",
+      "path": "/en",
+      "data": {}
+    },
+    {
+      "id": "projects-en",
+      "locale": "en",
+      "type": "page",
+      "name": "projects",
+      "path": "/en/projects",
+      "data": {}
+    },
+    {
+      "id": "about-en",
+      "locale": "en",
+      "type": "page",
+      "name": "about",
+      "path": "/en/about",
+      "data": {}
+    },
+    {
+      "id": "blog-index-en",
+      "locale": "en",
+      "type": "blog-index",
+      "name": "blog-index",
+      "path": "/en/blog",
+      "data": { "posts": [] }
+    },
+    {
+      "id": "home-ar",
+      "locale": "ar",
+      "type": "page",
+      "name": "home",
+      "path": "/ar",
+      "data": {}
+    },
+    {
+      "id": "projects-ar",
+      "locale": "ar",
+      "type": "page",
+      "name": "projects",
+      "path": "/ar/projects",
+      "data": {}
+    },
+    {
+      "id": "about-ar",
+      "locale": "ar",
+      "type": "page",
+      "name": "about",
+      "path": "/ar/about",
+      "data": {}
+    },
+    {
+      "id": "blog-index-ar",
+      "locale": "ar",
+      "type": "blog-index",
+      "name": "blog-index",
+      "path": "/ar/blog",
+      "data": { "posts": [] }
+    }
+  ],
+  "blogPosts": []
+}
+
