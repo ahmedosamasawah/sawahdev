@@ -33,7 +33,7 @@
                 <p class="text-muted-foreground mt-2 text-sm">{project.descriptions[locale]}</p>
 
                 <div class="text-muted-foreground mt-3 flex flex-wrap items-center gap-2 text-xs">
-                    {#each project.tech as tag}
+                    {#each project.tech as tag (tag)}
                         <span class="bg-accent text-accent-foreground rounded-full px-2 py-1"
                             >{tag}</span
                         >
