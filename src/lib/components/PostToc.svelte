@@ -20,15 +20,15 @@
             </button>
         </div>
 
-        <ul class="border-border space-y-1 border-l pl-2">
+        <ul
+            class="border-border space-y-1 border-l pl-2 rtl:border-r rtl:border-l-0 rtl:pr-2 rtl:pl-0"
+        >
             {#each headings as heading (heading.id)}
                 <li>
                     <button
                         type="button"
-                        class="hover:text-foreground w-full text-left transition {active_id ===
-                        heading.id
-                            ? 'text-foreground'
-                            : ''}"
+                        class="hover:text-foreground w-full text-left transition"
+                        class:text-foreground={active_id === heading.id}
                         onclick={() => scroll_to(heading.id)}
                     >
                         {heading.text}
@@ -49,8 +49,12 @@ const {headings, locale} = $props()
 
 let active_id = $state(headings[0]?.id ?? '')
 
+function get_element(id: string) {
+    return document.getElementById(id)
+}
+
 function scroll_to(id: string) {
-    const el = document.getElementById(id)
+    const el = get_element(id)
     if (!el) return
     el.scrollIntoView({behavior: 'smooth', block: 'start'})
     active_id = id
@@ -58,22 +62,22 @@ function scroll_to(id: string) {
 
 function scroll_relative(offset: number) {
     const idx = headings.findIndex(h => h.id === active_id)
+    if (idx === -1) return
     const next = Math.max(0, Math.min(idx + offset, headings.length - 1))
-    if (headings[next]) scroll_to(headings[next].id)
+    scroll_to(headings[next].id)
 }
 
 onMount(() => {
-    if (!headings.length) return
-
     const observer = new IntersectionObserver(
         entries => {
-            for (const e of entries) if (e.isIntersecting) active_id = e.target.id
+            const intersecting = entries.find(e => e.isIntersecting)
+            if (intersecting) active_id = intersecting.target.id
         },
         {rootMargin: '0px 0px -60% 0px', threshold: 0.1},
     )
 
     headings.forEach(h => {
-        const el = document.getElementById(h.id)
+        const el = get_element(h.id)
         if (el) observer.observe(el)
     })
 

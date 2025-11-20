@@ -169,10 +169,6 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --color-decoration-primary: var(--color-purple-500);
-  --color-decoration-secondary: var(--color-purple-600);
-  --color-decoration-accent: var(--color-violet-700);
-
   --animate-fade-up: fade-up var(--animate-duration) 100ms var(--animate-easing) forwards;
   --animate-fade-left: fade-left var(--animate-duration) var(--animate-easing) forwards;
   --animate-fade-down: fade-down var(--animate-duration) var(--animate-easing) forwards;
@@ -326,6 +322,57 @@ hr {
 
 .prose a {
   @apply text-foreground decoration-foreground/70 hover:decoration-foreground underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:decoration-solid;
+}
+
+.blog-article h1,
+.blog-article h2,
+.blog-article h3 {
+  scroll-margin-top: 96px;
+}
+
+.blog-article h1 {
+  @apply text-2xl font-semibold;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.blog-article h2 {
+  @apply text-xl font-semibold;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-article h3 {
+  @apply text-lg font-semibold;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-article p,
+.blog-article ul,
+.blog-article ol {
+  margin-bottom: 1rem;
+}
+
+.blog-article blockquote {
+  @apply border-accent/60 bg-accent/10 text-foreground rounded-lg border-l-4 px-4 py-3;
+  margin: 1rem 0;
+}
+
+.blog-article code {
+  @apply bg-muted rounded px-1.5 py-0.5 font-mono text-sm;
+}
+
+.blog-article pre {
+  @apply bg-muted text-foreground border-border overflow-auto rounded-lg border p-4 text-sm;
+}
+
+.blog-article pre code {
+  @apply rounded-none bg-transparent p-0;
+}
+
+.blog-article img {
+  @apply rounded-lg;
 }
 
 /* Falling stars helper */

@@ -1,6 +1,6 @@
 {#if post}
     <div class="flex w-full max-w-4xl gap-6 rtl:flex-row-reverse">
-        <article class="flex-1 space-y-4" lang={article_lang}>
+        <article class="blog-article flex-1 space-y-4" lang={article_lang}>
             <header>
                 <a
                     href="/{locale}/blog"
@@ -28,7 +28,7 @@
                 {/if}
             </header>
 
-            {#if is_fallback}
+            {#if post.is_fallback}
                 <p class="bg-muted text-muted-foreground rounded-md px-3 py-2 text-xs">
                     {translate(locale, 'blog.fallbackNotice')}
                 </p>
@@ -57,7 +57,6 @@ import {format_date, translate} from '$lib/i18n/runtime'
 const {locale, slug} = $props()
 
 const post = $derived(manifest.blogPosts.find(p => p.locale === locale && p.slug === slug))
-const is_fallback = $derived(Boolean(post?.is_fallback))
-const formatted_date = $derived(post ? format_date(locale, post.frontmatter.createdAt) : '')
-const article_lang = $derived(is_fallback && post?.source_locale ? post.source_locale : locale)
+const formatted_date = $derived(post && format_date(locale, post.frontmatter.createdAt))
+const article_lang = $derived(post?.is_fallback ? post.source_locale : locale)
 </script>
