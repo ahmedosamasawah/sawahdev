@@ -63,19 +63,15 @@ const segments = $derived(pathname.split('/').filter(Boolean))
 const locale = $derived(props.locale ?? locale_from_path(pathname))
 const section = $derived(segments[1] ?? '')
 
-const page = $derived(
-    props.route?.name ??
-        (!section
-            ? 'home'
-            : section === 'blog'
-              ? segments[2]
-                  ? 'blog-post'
-                  : 'blog-index'
-              : section),
-)
+const page = $derived.by(() => {
+    if (props.route?.name) return props.route.name
+    if (!section) return 'home'
+    if (section === 'blog') return segments[2] ? 'blog-post' : 'blog-index'
+    return section
+})
 
 const blog_slug = $derived(props.route?.slug ?? segments[2] ?? '')
-const seo = $derived(props.seo ?? null)
+const seo = $derived(props.seo)
 
 $effect(() => {
     if (is_browser) {

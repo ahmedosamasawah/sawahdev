@@ -14,7 +14,8 @@
     },
     "projects": {
         "title": "Projects",
-        "subtitle": "A selection of work I’ve built over the years."
+        "subtitle": "A selection of work I’ve built over the years.",
+        "viewProject": "View project"
     },
     "blog": {
         "title": "Blog",
@@ -29,6 +30,11 @@
     },
     "about": {
         "title": "About Me",
-        "subtitle": "A software engineer who values clarity, maintainability, and real-world problem-solving."
+        "subtitle": "A software engineer who values clarity, maintainability, and real-world problem-solving.",
+        "body": [
+            "I focus on building clear, maintainable web products with Svelte and small tooling.",
+            "Recent work includes a custom static site generator, bilingual portfolios, and performance audits.",
+            "I like simple stacks, explicit manifests, and shipping without surprise magic."
+        ]
     }
 }

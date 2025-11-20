@@ -14,9 +14,10 @@ function translate(locale: Locale, key: string): string {
     return typeof value === 'string' ? value : key
 }
 
-function locale_from_path(pathname: string): Locale {
+function locale_from_path(pathname: string): Locale | undefined {
     const segment = pathname.split('/').filter(Boolean)[0]
-    return segment && segment in messages ? (segment as Locale) : 'en'
+    const [defaultLocale] = Object.keys(messages) as Locale[]
+    return segment in messages ? (segment as Locale) : defaultLocale
 }
 
 function build_path_for_locale(pathname: string, locale: Locale): string {

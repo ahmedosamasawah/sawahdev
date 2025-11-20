@@ -14,7 +14,7 @@
         </p>
     {:else}
         <ul class="space-y-4">
-            {#each posts as post (post.id)}
+            {#each posts as post (post.slug)}
                 <li>
                     <PostCard {locale} {post} />
                 </li>

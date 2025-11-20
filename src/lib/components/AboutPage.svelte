@@ -5,10 +5,18 @@
     <p class="text-muted-foreground">
         {translate(locale, 'about.subtitle')}
     </p>
+
+    <div class="space-y-3 text-left">
+        {#each paragraphs as paragraph}
+            <p class="text-muted-foreground text-sm">{paragraph}</p>
+        {/each}
+    </div>
 </section>
 
 <script>
-import {translate} from '$lib/i18n/runtime'
+import {messages, translate} from '$lib/i18n/runtime'
 
 const {locale} = $props()
+
+const paragraphs = $derived(messages[locale].about.body)
 </script>
