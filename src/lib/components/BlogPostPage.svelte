@@ -1,25 +1,40 @@
 {#if post}
-    <article class="w-full max-w-2xl space-y-4 text-left">
-        <header class="space-y-2">
-            <h1 class="text-2xl font-semibold">
-                {post.frontmatter?.title}
-            </h1>
-            {#if post.frontmatter?.createdAt}
-                <p class="text-muted-foreground text-xs">
-                    {post.frontmatter.createdAt}
-                </p>
-            {/if}
-            {#if post.frontmatter?.description}
-                <p class="text-muted-foreground text-sm">
-                    {post.frontmatter.description}
-                </p>
-            {/if}
-        </header>
+    <div class="flex w-full max-w-4xl gap-6 rtl:flex-row-reverse">
+        <article class="flex-1 space-y-4">
+            <header>
+                <a
+                    href="/{locale}/blog"
+                    class="text-muted-foreground hover:text-foreground mb-4 inline-flex items-center gap-2 text-xs"
+                >
+                    <ArrowLeft class="h-3 w-3 rtl:rotate-180" />
+                    <span>{translate(locale, 'blog.title')}</span>
+                </a>
 
-        <div class="prose prose-sm dark:prose-invert max-w-none">
-            {@html post.html}
-        </div>
-    </article>
+                <div class="space-y-1">
+                    <h1 class="text-2xl font-semibold">
+                        {post.frontmatter.title}
+                    </h1>
+                    {#if formatted_date}
+                        <p class="text-muted-foreground text-xs">
+                            {formatted_date}
+                        </p>
+                    {/if}
+                </div>
+
+                {#if post.frontmatter.description}
+                    <p class="text-muted-foreground text-sm">
+                        {post.frontmatter.description}
+                    </p>
+                {/if}
+            </header>
+
+            <div class="prose prose-sm dark:prose-invert max-w-none">
+                {@html post.html}
+            </div>
+        </article>
+
+        <PostToc headings={post.headings} {locale} />
+    </div>
 {:else}
     <p class="text-muted-foreground text-sm">
         {translate(locale, 'blog.postNotFound')}
@@ -27,12 +42,14 @@
 {/if}
 
 <script>
+import {ArrowLeft} from '@lucide/svelte'
+
+import PostToc from '$lib/components/PostToc.svelte'
 import manifest from '$lib/data/route-manifest.json'
-import {translate} from '$lib/i18n/runtime'
+import {format_date, translate} from '$lib/i18n/runtime'
 
 const {locale, slug} = $props()
 
-const post = $derived(
-    manifest.blogPosts.find(entry => entry.locale === locale && entry.slug === slug),
-)
+const post = $derived(manifest.blogPosts.find(p => p.locale === locale && p.slug === slug))
+const formatted_date = $derived(post ? format_date(locale, post.frontmatter.createdAt) : '')
 </script>

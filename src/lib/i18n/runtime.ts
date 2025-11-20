@@ -5,8 +5,8 @@ const messages = {en, ar} as const
 
 type Locale = keyof typeof messages
 
-function get_nested(obj: Record<string, unknown>, path: string): unknown {
-    return path.split('.').reduce((acc, key) => acc?.[key] as Record<string, unknown>, obj)
+function get_nested(obj: any, path: string): unknown {
+    return path.split('.').reduce((acc, key) => acc?.[key], obj)
 }
 
 function translate(locale: Locale, key: string): string {
@@ -29,4 +29,16 @@ function build_path_for_locale(pathname: string, locale: Locale): string {
     return '/' + segments.join('/')
 }
 
-export {build_path_for_locale, type Locale, locale_from_path, messages, translate}
+function format_date(locale: Locale, value: string | Date): string {
+    if (!value) return ''
+    const date = value instanceof Date ? value : new Date(value)
+    if (Number.isNaN(date.getTime())) return String(value)
+    const intl_locale = locale === 'ar' ? 'ar' : 'en'
+    return new Intl.DateTimeFormat(intl_locale, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+    }).format(date)
+}
+
+export {build_path_for_locale, format_date, type Locale, locale_from_path, messages, translate}

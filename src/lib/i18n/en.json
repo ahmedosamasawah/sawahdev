@@ -20,7 +20,11 @@
     "title": "Blog",
     "subtitle": "Technical notes and thoughts from day-to-day development.",
     "noPosts": "No posts yet.",
-    "postNotFound": "Post not found."
+    "postNotFound": "Post not found.",
+    "tags": "Tags",
+    "toc": "Table of contents",
+    "prevSection": "Previous section",
+    "nextSection": "Next section"
   },
   "about": {
     "title": "About Me",

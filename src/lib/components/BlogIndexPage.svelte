@@ -15,22 +15,8 @@
     {:else}
         <ul class="space-y-4">
             {#each posts as post (post.id)}
-                <li class="border-border bg-card rounded-lg border p-4 text-left">
-                    <a href={`/${locale}/blog/${post.slug}`} class="block space-y-1">
-                        <h3 class="text-base font-semibold">
-                            {post.frontmatter?.title}
-                        </h3>
-                        {#if post.frontmatter?.description}
-                            <p class="text-muted-foreground text-sm">
-                                {post.frontmatter.description}
-                            </p>
-                        {/if}
-                        {#if post.frontmatter?.createdAt}
-                            <p class="text-muted-foreground text-xs">
-                                {post.frontmatter.createdAt}
-                            </p>
-                        {/if}
-                    </a>
+                <li>
+                    <PostCard {locale} {post} />
                 </li>
             {/each}
         </ul>
@@ -38,6 +24,7 @@
 </section>
 
 <script>
+import PostCard from '$lib/components/PostCard.svelte'
 import manifest from '$lib/data/route-manifest.json'
 import {translate} from '$lib/i18n/runtime'
 
@@ -45,9 +32,7 @@ const {locale} = $props()
 
 const posts = $derived(
     manifest.blogPosts
-        .filter(post => post.locale === locale)
-        .sort((a, b) =>
-            (b.frontmatter?.createdAt ?? '').localeCompare(a.frontmatter?.createdAt ?? ''),
-        ),
+        .filter(p => p.locale === locale)
+        .sort((a, b) => b.frontmatter.createdAt.localeCompare(a.frontmatter.createdAt)),
 )
 </script>

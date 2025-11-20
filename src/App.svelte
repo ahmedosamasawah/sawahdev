@@ -1,20 +1,16 @@
 <Layout {locale}>
-    {#if is_ready}
-        {#if page === 'home'}
-            <HomePage {locale} />
-        {:else if page === 'projects'}
-            <ProjectsPage {locale} />
-        {:else if page === 'about'}
-            <AboutPage {locale} />
-        {:else if page === 'blog-index'}
-            <BlogIndexPage {locale} />
-        {:else if page === 'blog-post'}
-            <BlogPostPage {locale} slug={blog_slug} />
-        {:else}
-            <p class="text-center">TODO route: {page}</p>
-        {/if}
+    {#if page === 'home'}
+        <HomePage {locale} />
+    {:else if page === 'projects'}
+        <ProjectsPage {locale} />
+    {:else if page === 'about'}
+        <AboutPage {locale} />
+    {:else if page === 'blog-index'}
+        <BlogIndexPage {locale} />
+    {:else if page === 'blog-post'}
+        <BlogPostPage {locale} slug={blog_slug} />
     {:else}
-        <p class="text-center">Loading...</p>
+        <p class="text-center">TODO route: {page}</p>
     {/if}
 </Layout>
 
@@ -35,26 +31,28 @@ const props = $props<{
 
 const is_browser = typeof window !== 'undefined'
 const client_route = is_browser ? router.route : null
-
-const pathname = $derived(props.route?.path ?? $client_route?.url?.pathname ?? '/')
+const pathname = $derived(props.route?.path ?? $client_route?.url.pathname ?? '/')
 const segments = $derived(pathname.split('/').filter(Boolean))
 const locale = $derived(props.locale ?? locale_from_path(pathname))
 const section = $derived(segments[1] ?? '')
 
-const page = $derived.by(() => {
-    if (props.route?.name) {
-        const name = props.route.name
-        if (name === 'blog-post') return 'blog-post'
-        if (name === 'blog-index') return 'blog-index'
-        return name
-    }
-
-    if (!section) return 'home'
-    if (section === 'blog') return segments[2] ? 'blog-post' : 'blog-index'
-    return section
-})
+const page = $derived(
+    props.route?.name ??
+        (!section
+            ? 'home'
+            : section === 'blog'
+              ? segments[2]
+                  ? 'blog-post'
+                  : 'blog-index'
+              : section),
+)
 
 const blog_slug = $derived(props.route?.slug ?? segments[2] ?? '')
 
-const is_ready = $derived(props.route || $client_route?.url)
+$effect(() => {
+    if (is_browser) {
+        document.documentElement.lang = locale
+        document.documentElement.dir = locale === 'ar' ? 'rtl' : 'ltr'
+    }
+})
 </script>
