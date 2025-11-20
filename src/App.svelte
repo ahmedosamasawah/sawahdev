@@ -1,3 +1,28 @@
+<svelte:head>
+    {#if seo}
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <link rel="canonical" href={seo.canonical} />
+        {#each seo.alternates as alt}
+            <link rel="alternate" hreflang={alt.locale} href={alt.href} />
+        {/each}
+        <meta property="og:title" content={seo.og.title} />
+        <meta property="og:description" content={seo.og.description} />
+        <meta property="og:url" content={seo.og.url} />
+        <meta property="og:locale" content={seo.og.locale} />
+        <meta property="og:type" content={seo.og.type} />
+        {#if seo.og.image}
+            <meta property="og:image" content={seo.og.image} />
+        {/if}
+        <meta name="twitter:card" content={seo.twitter.card} />
+        <meta name="twitter:title" content={seo.twitter.title} />
+        <meta name="twitter:description" content={seo.twitter.description} />
+        {#if seo.twitter.image}
+            <meta name="twitter:image" content={seo.twitter.image} />
+        {/if}
+    {/if}
+</svelte:head>
+
 <Layout {locale}>
     {#if page === 'home'}
         <HomePage {locale} />
@@ -27,6 +52,8 @@ import {router} from '$lib/router'
 const props = $props<{
     route?: {path: string; name: string; slug?: string}
     locale?: string
+    data?: any
+    seo?: any
 }>()
 
 const is_browser = typeof window !== 'undefined'
@@ -48,6 +75,7 @@ const page = $derived(
 )
 
 const blog_slug = $derived(props.route?.slug ?? segments[2] ?? '')
+const seo = $derived(props.seo ?? null)
 
 $effect(() => {
     if (is_browser) {

@@ -8,33 +8,31 @@ if (!site_url_env) {
 
 const site_url = site_url_env || 'https://example.com'
 
-function build_seo(route) {
+const ROUTE_LABELS = {
+  projects: 'Projects',
+  about: 'About',
+  'blog-index': 'Blog',
+}
+
+function build_seo(route, origin = site_url) {
   const base_title = 'Ahmed Osama – Portfolio'
   const is_blog_post = route.name === 'blog-post'
 
-  let route_label = ''
-  if (route.name === 'projects') route_label = 'Projects'
-  if (route.name === 'about') route_label = 'About'
-  if (route.name === 'blog-index') route_label = 'Blog'
-  if (is_blog_post) {
-    route_label =
-      route.data?.post?.frontmatter?.ogTitle ||
+  const route_label = is_blog_post
+    ? route.data?.post?.frontmatter?.ogTitle ||
       route.data?.post?.frontmatter?.title ||
       'Blog'
-  }
+    : ROUTE_LABELS[route.name] || ''
 
-  const title = route_label
-    ? `${route_label} | ${base_title}`
-    : base_title
-
+  const title = route_label ? `${route_label} | ${base_title}` : base_title
   const description =
     route.data?.post?.frontmatter?.description ||
     'Personal portfolio and blog.'
 
-  const canonical = new URL(route.path, site_url).toString()
+  const canonical = new URL(route.path, origin).toString()
   const og_image =
     is_blog_post && route.slug
-      ? new URL(`/og/${route.locale}/${route.slug}.png`, site_url).toString()
+      ? new URL(`/og/${route.locale}/${route.slug}.png`, origin).toString()
       : null
 
   const alternates = locales
@@ -43,7 +41,7 @@ function build_seo(route) {
       const alt_path = route.path.replace(/^\/[^/]+/, `/${locale}`)
       return {
         locale,
-        href: new URL(alt_path, site_url).toString(),
+        href: new URL(alt_path, origin).toString(),
       }
     })
 
@@ -66,4 +64,4 @@ function build_seo(route) {
   return { title, description, canonical, alternates, og, twitter }
 }
 
-export { build_seo,site_url }
+export { build_seo, site_url }

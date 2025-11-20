@@ -4,7 +4,7 @@ import path from 'node:path'
 import { render as svelte_render } from 'svelte/server'
 import { createServer } from 'vite'
 
-import { dist_dir, file_exists,root_dir } from './fs-utils.js'
+import { dist_dir, file_exists, root_dir } from './fs-utils.js'
 
 function build_og_html(body, locale) {
   return `<!doctype html>
@@ -52,9 +52,20 @@ async function generate_og_images(manifest) {
     const og_module = await vite_server.ssrLoadModule('/src/Og.svelte')
     const Og = og_module.default
 
-    const browser = chromium ? await chromium.launch() : null
-    const page = browser ? await browser.newPage() : null
-    if (page) await page.setViewportSize({ width: 1200, height: 630 })
+    let browser = null
+    let page = null
+
+    if (chromium) {
+      try {
+        browser = await chromium.launch({
+          args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        })
+        page = await browser.newPage()
+        await page.setViewportSize({ width: 1200, height: 630 })
+      } catch (error) {
+        console.warn('playwright launch failed, writing placeholder OG images', error)
+      }
+    }
 
     for (const route of blog_routes) {
       const { post, is_fallback } = route.data
@@ -82,9 +93,16 @@ async function generate_og_images(manifest) {
       const file_path = path.join(og_dir, `${route.slug}.png`)
 
       if (page) {
-        await page.setContent(html, { waitUntil: 'networkidle' })
-        await page.screenshot({ path: file_path })
-      } else await fs.writeFile(file_path, placeholder_png)
+        try {
+          await page.setContent(html, { waitUntil: 'networkidle' })
+          await page.screenshot({ path: file_path })
+        } catch (error) {
+          console.warn('playwright screenshot failed, writing placeholder', error)
+          await fs.writeFile(file_path, placeholder_png)
+        }
+      } else {
+        await fs.writeFile(file_path, placeholder_png)
+      }
     }
 
     if (browser) await browser.close()

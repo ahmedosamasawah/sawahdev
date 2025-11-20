@@ -14,13 +14,6 @@ function route_path_to_file(pathname) {
   return path.join(dir, 'index.html')
 }
 
-function escape_html(text) {
-  if (!text) return ''
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-}
 
 function escape_attr(text) {
   if (!text) return ''
@@ -31,56 +24,18 @@ function escape_attr(text) {
     .replace(/>/g, '&gt;')
 }
 
-function build_html_document({ lang, dir, head, body, entry_js, css_hrefs, seo }) {
-  const title = escape_html(seo?.title || '')
-  const description = escape_attr(seo?.description || '')
-  const canonical = seo?.canonical ? escape_attr(seo.canonical) : ''
-  const alternates = Array.isArray(seo?.alternates) ? seo.alternates : []
-  const og = seo?.og || {}
-  const twitter = seo?.twitter || {}
-
-  const css_links = (css_hrefs || [])
+function build_html_document({ lang, dir, head, body, entry_js, css_hrefs }) {
+  const css_links = css_hrefs
     .map((href) => `<link rel="stylesheet" href="${escape_attr(href)}">`)
     .join('\n    ')
-
-  const canonical_link = canonical ? `<link rel="canonical" href="${canonical}">` : ''
-  const alternate_links = alternates
-    .map((alt) => `<link rel="alternate" hreflang="${escape_attr(alt.locale)}" href="${escape_attr(alt.href)}">`)
-    .join('\n    ')
-
-  const og_tags = [
-    og.title && `<meta property="og:title" content="${escape_attr(og.title)}">`,
-    og.description && `<meta property="og:description" content="${escape_attr(og.description)}">`,
-    og.url && `<meta property="og:url" content="${escape_attr(og.url)}">`,
-    og.locale && `<meta property="og:locale" content="${escape_attr(og.locale)}">`,
-    og.type && `<meta property="og:type" content="${escape_attr(og.type)}">`,
-    og.image && `<meta property="og:image" content="${escape_attr(og.image)}">`,
-  ].filter(Boolean)
-
-  const twitter_tags = [
-    twitter.card && `<meta name="twitter:card" content="${escape_attr(twitter.card)}">`,
-    twitter.title && `<meta name="twitter:title" content="${escape_attr(twitter.title)}">`,
-    twitter.description && `<meta name="twitter:description" content="${escape_attr(twitter.description)}">`,
-    twitter.image && `<meta name="twitter:image" content="${escape_attr(twitter.image)}">`,
-  ].filter(Boolean)
-
-  const head_parts = [
-    '<meta charset="utf-8">',
-    '<meta name="viewport" content="width=device-width, initial-scale=1">',
-    title && `<title>${title}</title>`,
-    description && `<meta name="description" content="${description}">`,
-    canonical_link,
-    alternate_links,
-    head,
-    css_links,
-    ...og_tags,
-    ...twitter_tags,
-  ].filter(Boolean)
 
   return `<!doctype html>
 <html lang="${lang}" dir="${dir}">
   <head>
-    ${head_parts.join('\n    ')}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    ${head}
+    ${css_links}
   </head>
   <body>
     <div id="app">${body}</div>
@@ -128,7 +83,6 @@ async function ssg_routes(manifest, i18n, assets) {
         body,
         entry_js: assets.entry_js,
         css_hrefs: assets.css,
-        seo,
       })
 
       const file_path = route_path_to_file(route.path)
