@@ -68,10 +68,7 @@ export default [
             'import-x/first': 'error',
             'import-x/newline-after-import': 'error',
             'import-x/no-duplicates': 'error',
-            'import-x/extensions': [
-                'error',
-                'ignorePackages',
-            ],
+            'import-x/extensions': 'off',
         },
     },
     {

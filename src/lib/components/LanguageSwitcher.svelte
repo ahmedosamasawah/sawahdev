@@ -3,9 +3,9 @@
 </Button>
 
 <script>
-import {Button} from '$lib/components/ui/button/index.ts'
-import {build_path_for_locale, locale_from_path} from '$lib/i18n/runtime.ts'
-import {router} from '$lib/router.ts'
+import {Button} from '$lib/components/ui/button/index'
+import {build_path_for_locale, locale_from_path} from '$lib/i18n/runtime'
+import {router} from '$lib/router'
 
 const route = router.route
 
