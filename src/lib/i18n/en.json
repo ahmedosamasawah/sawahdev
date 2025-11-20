@@ -1,33 +1,34 @@
 {
-  "common": {
-    "siteTitle": "Ahmed Osama | Software Engineer",
-    "nav": {
-      "home": "Home",
-      "projects": "Projects",
-      "blog": "Blog",
-      "about": "About"
+    "common": {
+        "siteTitle": "Ahmed Osama | Software Engineer",
+        "nav": {
+            "home": "Home",
+            "projects": "Projects",
+            "blog": "Blog",
+            "about": "About"
+        }
+    },
+    "home": {
+        "heroTitle": "I build reliable software.",
+        "heroIntro": "Focused on clean code, clear structure, and practical user experience."
+    },
+    "projects": {
+        "title": "Projects",
+        "subtitle": "A selection of work I’ve built over the years."
+    },
+    "blog": {
+        "title": "Blog",
+        "subtitle": "Technical notes and thoughts from day-to-day development.",
+        "noPosts": "No posts yet.",
+        "postNotFound": "Post not found.",
+        "fallbackNotice": "This article is only available in the default language. Showing the original version.",
+        "tags": "Tags",
+        "toc": "Table of contents",
+        "prevSection": "Previous section",
+        "nextSection": "Next section"
+    },
+    "about": {
+        "title": "About Me",
+        "subtitle": "A software engineer who values clarity, maintainability, and real-world problem-solving."
     }
-  },
-  "home": {
-    "heroTitle": "I build reliable software.",
-    "heroIntro": "Focused on clean code, clear structure, and practical user experience."
-  },
-  "projects": {
-    "title": "Projects",
-    "subtitle": "A selection of work I’ve built over the years."
-  },
-  "blog": {
-    "title": "Blog",
-    "subtitle": "Technical notes and thoughts from day-to-day development.",
-    "noPosts": "No posts yet.",
-    "postNotFound": "Post not found.",
-    "tags": "Tags",
-    "toc": "Table of contents",
-    "prevSection": "Previous section",
-    "nextSection": "Next section"
-  },
-  "about": {
-    "title": "About Me",
-    "subtitle": "A software engineer who values clarity, maintainability, and real-world problem-solving."
-  }
 }

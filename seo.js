@@ -10,12 +10,13 @@ const site_url = site_url_env || 'https://example.com'
 
 function build_seo(route) {
   const base_title = 'Ahmed Osama – Portfolio'
+  const is_blog_post = route.name === 'blog-post'
 
   let route_label = ''
   if (route.name === 'projects') route_label = 'Projects'
   if (route.name === 'about') route_label = 'About'
   if (route.name === 'blog-index') route_label = 'Blog'
-  if (route.name === 'blog-post') {
+  if (is_blog_post) {
     route_label =
       route.data?.post?.frontmatter?.ogTitle ||
       route.data?.post?.frontmatter?.title ||
@@ -31,6 +32,10 @@ function build_seo(route) {
     'Personal portfolio and blog.'
 
   const canonical = new URL(route.path, site_url).toString()
+  const og_image =
+    is_blog_post && route.slug
+      ? new URL(`/og/${route.locale}/${route.slug}.png`, site_url).toString()
+      : null
 
   const alternates = locales
     .filter((locale) => locale !== route.locale)
@@ -42,7 +47,23 @@ function build_seo(route) {
       }
     })
 
-  return { title, description, canonical, alternates }
+  const og = {
+    title,
+    description,
+    url: canonical,
+    locale: route.locale,
+    type: is_blog_post ? 'article' : 'website',
+    image: og_image,
+  }
+
+  const twitter = {
+    card: is_blog_post ? 'summary_large_image' : 'summary',
+    title,
+    description,
+    image: og_image,
+  }
+
+  return { title, description, canonical, alternates, og, twitter }
 }
 
-export { site_url, build_seo }
+export { build_seo,site_url }

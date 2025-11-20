@@ -1,8 +1,10 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { createServer } from 'vite'
+
 import { render as svelte_render } from 'svelte/server'
-import { root_dir, dist_dir } from './fs-utils.js'
+import { createServer } from 'vite'
+
+import { dist_dir,root_dir } from './fs-utils.js'
 import { build_seo } from './seo.js'
 
 function route_path_to_file(pathname) {
@@ -32,18 +34,47 @@ function escape_attr(text) {
 function build_html_document({ lang, dir, head, body, entry_js, css_hrefs, seo }) {
   const title = escape_html(seo?.title || '')
   const description = escape_attr(seo?.description || '')
+  const canonical = seo?.canonical ? escape_attr(seo.canonical) : ''
+  const alternates = Array.isArray(seo?.alternates) ? seo.alternates : []
+  const og = seo?.og || {}
+  const twitter = seo?.twitter || {}
 
   const css_links = (css_hrefs || [])
     .map((href) => `<link rel="stylesheet" href="${escape_attr(href)}">`)
     .join('\n    ')
+
+  const canonical_link = canonical ? `<link rel="canonical" href="${canonical}">` : ''
+  const alternate_links = alternates
+    .map((alt) => `<link rel="alternate" hreflang="${escape_attr(alt.locale)}" href="${escape_attr(alt.href)}">`)
+    .join('\n    ')
+
+  const og_tags = [
+    og.title && `<meta property="og:title" content="${escape_attr(og.title)}">`,
+    og.description && `<meta property="og:description" content="${escape_attr(og.description)}">`,
+    og.url && `<meta property="og:url" content="${escape_attr(og.url)}">`,
+    og.locale && `<meta property="og:locale" content="${escape_attr(og.locale)}">`,
+    og.type && `<meta property="og:type" content="${escape_attr(og.type)}">`,
+    og.image && `<meta property="og:image" content="${escape_attr(og.image)}">`,
+  ].filter(Boolean)
+
+  const twitter_tags = [
+    twitter.card && `<meta name="twitter:card" content="${escape_attr(twitter.card)}">`,
+    twitter.title && `<meta name="twitter:title" content="${escape_attr(twitter.title)}">`,
+    twitter.description && `<meta name="twitter:description" content="${escape_attr(twitter.description)}">`,
+    twitter.image && `<meta name="twitter:image" content="${escape_attr(twitter.image)}">`,
+  ].filter(Boolean)
 
   const head_parts = [
     '<meta charset="utf-8">',
     '<meta name="viewport" content="width=device-width, initial-scale=1">',
     title && `<title>${title}</title>`,
     description && `<meta name="description" content="${description}">`,
+    canonical_link,
+    alternate_links,
     head,
     css_links,
+    ...og_tags,
+    ...twitter_tags,
   ].filter(Boolean)
 
   return `<!doctype html>
@@ -104,10 +135,23 @@ async function ssg_routes(manifest, i18n, assets) {
       await fs.mkdir(path.dirname(file_path), { recursive: true })
       await fs.writeFile(file_path, html, 'utf8')
     }
+
+    const default_locale = manifest.locales?.[0] || 'en'
+    const root_redirect = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0; url=/${default_locale}/">
+    <link rel="canonical" href="/${default_locale}/">
+  </head>
+  <body></body>
+</html>
+`
+
+    await fs.writeFile(path.join(dist_dir, 'index.html'), root_redirect, 'utf8')
   } finally {
     await vite_server.close()
   }
 }
 
 export { ssg_routes }
-

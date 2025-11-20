@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
+
 import { root_dir } from './fs-utils.js'
 
 const locales = ['en', 'ar']
@@ -15,6 +16,8 @@ function build_manifest(blog_posts) {
     blog_by_slug.set(post.slug, entry)
   }
 
+  const blog_posts_with_fallbacks = []
+
   for (const locale of locales) {
     for (const page of static_pages) {
       const path_suffix = page === 'home' ? '' : `/${page}`
@@ -28,14 +31,23 @@ function build_manifest(blog_posts) {
         data: {},
       })
     }
+  }
 
-    const posts_for_locale = []
+  for (const [slug, by_locale] of blog_by_slug) {
+    const available_locales = Object.keys(by_locale)
+    const default_locale = available_locales.includes('en') ? 'en' : available_locales[0]
 
-    for (const [slug, by_locale] of blog_by_slug) {
-      const post = by_locale[locale]
+    for (const locale of locales) {
+      const source_post = by_locale[locale] || by_locale[default_locale]
 
-      if (!post) {
-        throw new Error(`Missing blog post "${slug}" for locale "${locale}"`)
+      if (!source_post) throw new Error(`Missing blog post "${slug}" and no fallback available`)
+
+      const is_fallback = !by_locale[locale]
+      const post = {
+        ...source_post,
+        locale,
+        source_locale: source_post.locale,
+        is_fallback,
       }
 
       routes.push({
@@ -47,11 +59,18 @@ function build_manifest(blog_posts) {
         slug,
         data: {
           post,
+          is_fallback,
+          available_locales,
+          default_locale,
         },
       })
 
-      posts_for_locale.push(post)
+      blog_posts_with_fallbacks.push(post)
     }
+  }
+
+  for (const locale of locales) {
+    const posts_for_locale = blog_posts_with_fallbacks.filter((p) => p.locale === locale)
 
     routes.push({
       id: `blog-index-${locale}`,
@@ -67,6 +86,8 @@ function build_manifest(blog_posts) {
           description: post.frontmatter.description,
           createdAt: post.frontmatter.createdAt,
           tags: post.frontmatter.tags,
+          is_fallback: post.is_fallback,
+          source_locale: post.source_locale,
         })),
       },
     })
@@ -75,7 +96,7 @@ function build_manifest(blog_posts) {
   return {
     locales,
     routes,
-    blogPosts: blog_posts,
+    blogPosts: blog_posts_with_fallbacks,
   }
 }
 
@@ -85,4 +106,4 @@ async function write_manifest(manifest) {
   await fs.writeFile(out_path, json, 'utf8')
 }
 
-export { locales, build_manifest, write_manifest }
+export { build_manifest, locales, write_manifest }

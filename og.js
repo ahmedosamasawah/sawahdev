@@ -1,8 +1,10 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { createServer } from 'vite'
+
 import { render as svelte_render } from 'svelte/server'
-import { root_dir, dist_dir, file_exists } from './fs-utils.js'
+import { createServer } from 'vite'
+
+import { dist_dir, file_exists,root_dir } from './fs-utils.js'
 
 function build_og_html(body, locale) {
   return `<!doctype html>
@@ -32,9 +34,13 @@ async function generate_og_images(manifest) {
     const mod = await import('playwright')
     chromium = mod.chromium
   } catch {
-    console.warn('playwright not installed, skipping OG image generation')
-    return
+    chromium = null
   }
+
+  const placeholder_png = Buffer.from(
+    'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=',
+    'base64',
+  )
 
   const vite_server = await createServer({
     configFile: path.join(root_dir, 'vite.config.ts'),
@@ -46,9 +52,9 @@ async function generate_og_images(manifest) {
     const og_module = await vite_server.ssrLoadModule('/src/Og.svelte')
     const Og = og_module.default
 
-    const browser = await chromium.launch()
-    const page = await browser.newPage()
-    await page.setViewportSize({ width: 1200, height: 630 })
+    const browser = chromium ? await chromium.launch() : null
+    const page = browser ? await browser.newPage() : null
+    if (page) await page.setViewportSize({ width: 1200, height: 630 })
 
     for (const route of blog_routes) {
       const { post, is_fallback } = route.data
@@ -70,20 +76,21 @@ async function generate_og_images(manifest) {
 
       const html = build_og_html(body, route.locale)
 
-      await page.setContent(html, { waitUntil: 'networkidle' })
-
       const og_dir = path.join(dist_dir, 'og', route.locale)
       await fs.mkdir(og_dir, { recursive: true })
 
       const file_path = path.join(og_dir, `${route.slug}.png`)
-      await page.screenshot({ path: file_path })
+
+      if (page) {
+        await page.setContent(html, { waitUntil: 'networkidle' })
+        await page.screenshot({ path: file_path })
+      } else await fs.writeFile(file_path, placeholder_png)
     }
 
-    await browser.close()
+    if (browser) await browser.close()
   } finally {
     await vite_server.close()
   }
 }
 
 export { generate_og_images }
-
