@@ -22,7 +22,7 @@
                 </a>
             </nav>
         </div>
-        <LanguageSwitcher />
+        <LanguageSwitcher {locale} />
     </header>
 
     <main class="flex flex-1 flex-col items-center justify-center gap-8 px-6">

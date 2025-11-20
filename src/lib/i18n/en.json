@@ -18,7 +18,9 @@
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Technical notes and thoughts from day-to-day development."
+    "subtitle": "Technical notes and thoughts from day-to-day development.",
+    "noPosts": "No posts yet.",
+    "postNotFound": "Post not found."
   },
   "about": {
     "title": "About Me",

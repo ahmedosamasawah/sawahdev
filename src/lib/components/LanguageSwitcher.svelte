@@ -1,20 +1,23 @@
 <Button variant="link" size="sm" onclick={switch_locale}>
-    {current_locale === 'en' ? 'العربية' : 'English'}
+    {locale === 'en' ? 'العربية' : 'English'}
 </Button>
 
-<script>
+<script lang="ts">
 import {Button} from '$lib/components/ui/button/index'
-import {build_path_for_locale, locale_from_path} from '$lib/i18n/runtime'
+import {build_path_for_locale} from '$lib/i18n/runtime'
 import {router} from '$lib/router'
 
-const route = router.route
+const {locale} = $props<{locale: string}>()
 
-const current_locale = $derived(locale_from_path($route.url?.pathname ?? '/'))
+const is_browser = typeof window !== 'undefined'
+const route = is_browser ? router.route : null
+
+const current_path = $derived($route?.url?.pathname ?? `/${locale}`)
 
 function switch_locale() {
-    if (!$route.url) return
+    if (!is_browser || !router) return
 
-    const next = current_locale === 'en' ? 'ar' : 'en'
-    router.goto(build_path_for_locale($route.url.pathname, next))
+    const next = locale === 'en' ? 'ar' : 'en'
+    router.goto(build_path_for_locale(current_path, next))
 }
 </script>
