@@ -1,17 +1,26 @@
-<section class="max-w-2xl space-y-4 text-center">
-    <h2 class="text-2xl font-semibold">
-        {translate(locale, 'about.title')}
-    </h2>
-    <p class="text-muted-foreground">
-        {translate(locale, 'about.subtitle')}
-    </p>
+<div class="w-full max-w-2xl space-y-12">
+    <section class="space-y-4">
+        <h1 class="text-2xl font-semibold">
+            {translate(locale, 'about.title')}
+        </h1>
+        <p class="text-muted-foreground leading-relaxed">
+            {translate(locale, 'about.subtitle')}
+        </p>
+        <a
+            href="/{locale}"
+            class="hover:text-foreground text-muted-foreground block text-sm underline decoration-dotted underline-offset-4"
+        >
+            {translate(locale, 'common.backArrow')}
+            {translate(locale, 'common.nav.home')}
+        </a>
+    </section>
 
-    <div class="space-y-3 text-left">
+    <section class="text-muted-foreground space-y-4 text-sm leading-relaxed">
         {#each paragraphs as paragraph}
-            <p class="text-muted-foreground text-sm">{paragraph}</p>
+            <p>{paragraph}</p>
         {/each}
-    </div>
-</section>
+    </section>
+</div>
 
 <script>
 import {messages, translate} from '$lib/i18n/runtime'

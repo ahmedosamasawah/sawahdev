@@ -11,6 +11,9 @@ CHANGED=$(git diff --diff-filter=d --name-only HEAD)
 [ -z "$CHANGED" ] || pnpm exec eslint --fix $CHANGED
 '''
 
+[tasks.install]
+run = 'pnpm i'
+
 [tasks.dev]
 run = 'pnpm dev'
 alias = 'default'

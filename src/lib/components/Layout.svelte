@@ -2,26 +2,7 @@
     <Decoration />
     <FallingStars />
 
-    <header class="flex items-center justify-between px-6 py-4">
-        <div class="flex items-center gap-6">
-            <h1 class="text-lg font-bold">
-                {translate(locale, 'common.siteTitle')}
-            </h1>
-            <nav class="text-muted-foreground hidden gap-4 text-sm md:flex">
-                <a href="/{locale}" class="hover:text-foreground">
-                    {translate(locale, 'common.nav.home')}
-                </a>
-                <a href="/{locale}/projects" class="hover:text-foreground">
-                    {translate(locale, 'common.nav.projects')}
-                </a>
-                <a href="/{locale}/blog" class="hover:text-foreground">
-                    {translate(locale, 'common.nav.blog')}
-                </a>
-                <a href="/{locale}/about" class="hover:text-foreground">
-                    {translate(locale, 'common.nav.about')}
-                </a>
-            </nav>
-        </div>
+    <header class="flex items-center justify-end px-6 py-4">
         <LanguageSwitcher {locale} />
     </header>
 
@@ -29,9 +10,43 @@
         {@render children()}
     </main>
 
-    <footer class="text-muted-foreground flex items-center justify-between px-6 py-4 text-xs">
-        <span>© {new Date().getFullYear()} Ahmed Osama</span>
-        <SocialLinks />
+    <footer
+        class="text-muted-foreground flex flex-wrap items-center justify-between gap-4 px-6 py-8 text-sm"
+    >
+        <div class="flex flex-wrap items-center gap-4">
+            <a
+                href="https://github.com/AhmedOsamaDev"
+                class="hover:text-foreground"
+                target="_blank"
+                rel="noopener"
+            >
+                github
+            </a>
+            <a
+                href="https://www.linkedin.com/in/ahmedosamadev"
+                class="hover:text-foreground"
+                target="_blank"
+                rel="noopener"
+            >
+                linkedin
+            </a>
+            <a
+                href="https://x.com/ahmedosamadev"
+                class="hover:text-foreground"
+                target="_blank"
+                rel="noopener"
+            >
+                twitter
+            </a>
+        </div>
+        <a
+            href="https://github.com/AhmedOsamaDev/portfolio"
+            class="hover:text-foreground"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            {translate(locale, 'common.footer.sourceCode')}
+        </a>
     </footer>
 </div>
 
@@ -39,7 +54,7 @@
 import Decoration from '$lib/components/Decoration.svelte'
 import FallingStars from '$lib/components/FallingStars.svelte'
 import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
-import SocialLinks from '$lib/components/SocialLinks.svelte'
+// import SocialLinks from '$lib/components/SocialLinks.svelte'
 import {translate} from '$lib/i18n/runtime'
 
 const {locale, children} = $props()

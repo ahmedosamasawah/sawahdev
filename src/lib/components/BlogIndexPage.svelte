@@ -1,32 +1,46 @@
-<section class="w-full max-w-2xl space-y-6">
-    <header class="space-y-2 text-center md:text-left">
-        <h2 class="text-2xl font-semibold">
+<div class="w-full max-w-2xl space-y-12">
+    <section class="space-y-4">
+        <h1 class="text-2xl font-semibold">
             {translate(locale, 'blog.title')}
-        </h2>
-        <p class="text-muted-foreground">
+        </h1>
+        <p class="text-muted-foreground leading-relaxed">
             {translate(locale, 'blog.subtitle')}
         </p>
-    </header>
+        <a
+            href="/{locale}"
+            class="hover:text-foreground text-muted-foreground block text-sm underline decoration-dotted underline-offset-4"
+        >
+            {translate(locale, 'common.backArrow')}
+            {translate(locale, 'common.nav.home')}
+        </a>
+    </section>
 
     {#if posts.length === 0}
-        <p class="text-muted-foreground text-center text-sm md:text-left">
+        <p class="text-muted-foreground text-sm">
             {translate(locale, 'blog.noPosts')}
         </p>
     {:else}
-        <ul class="space-y-4">
+        <section class="space-y-4">
             {#each posts as post (post.slug)}
-                <li>
-                    <PostCard {locale} {post} />
-                </li>
+                <div class="space-y-1">
+                    <a
+                        href="/{locale}/blog/{post.slug}"
+                        class="hover:text-foreground block text-base underline decoration-dotted underline-offset-4"
+                    >
+                        {post.frontmatter.title}
+                    </a>
+                    <time class="text-muted-foreground block text-xs">
+                        {format_date(locale, post.frontmatter.createdAt)}
+                    </time>
+                </div>
             {/each}
-        </ul>
+        </section>
     {/if}
-</section>
+</div>
 
 <script>
-import PostCard from '$lib/components/PostCard.svelte'
 import manifest from '$lib/data/route-manifest.json'
-import {translate} from '$lib/i18n/runtime'
+import {format_date, translate} from '$lib/i18n/runtime'
 
 const {locale} = $props()
 
