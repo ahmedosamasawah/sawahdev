@@ -13,9 +13,9 @@
             <div class="flex items-start justify-between gap-4">
                 <div>
                     <h1 class="mb-2 text-3xl font-semibold">
-                        {project.titles[locale]}
+                        {project.titles[loc]}
                     </h1>
-                    <p class="text-muted-foreground text-sm">{project.role[locale]}</p>
+                    <p class="text-muted-foreground text-sm">{project.role[loc]}</p>
                 </div>
                 {#if project.year}
                     <span class="text-muted-foreground text-sm font-medium">{project.year}</span>
@@ -39,7 +39,7 @@
             <section>
                 <img
                     src={project.image}
-                    alt={project.titles[locale]}
+                    alt={project.titles[loc]}
                     class="w-full rounded-2xl shadow-lg"
                 />
             </section>
@@ -47,7 +47,7 @@
 
         <!-- Content Sections -->
         {#if project.detailedContent}
-            {@const content = project.detailedContent[locale]}
+            {@const content = project.detailedContent[loc]}
 
             <section class="space-y-8">
                 <!-- Overview -->
@@ -85,7 +85,7 @@
                         <div class="border-border overflow-hidden rounded-xl border shadow-md">
                             <img
                                 src={image}
-                                alt="{project.titles[locale]} screenshot"
+                                alt="{project.titles[loc]} screenshot"
                                 class="w-full transition-transform duration-300 hover:scale-105"
                             />
                         </div>
@@ -130,12 +130,15 @@
     </div>
 {/if}
 
-<script>
+<script lang="ts">
 import {ExternalLink, Github} from '@lucide/svelte'
 
-import {projects} from '$lib/data/projects'
-import {translate} from '$lib/i18n/runtime'
+import {projects, type Project} from '$lib/data/projects'
+import {translate, type Locale} from '$lib/i18n/runtime'
 
-const {locale, projectId} = $props()
-const project = $derived(projects.find(p => p.id === projectId))
+const {locale, projectId} = $props<{locale: Locale; projectId: string}>()
+const project = $derived<Project | undefined>(projects.find(p => p.id === projectId))
+
+// Helper to safely access localized content
+const loc = $derived<Locale>(locale as Locale)
 </script>

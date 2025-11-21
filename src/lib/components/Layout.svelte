@@ -50,12 +50,14 @@
     </footer>
 </div>
 
-<script>
+<script lang="ts">
+import type {Snippet} from 'svelte'
+
 import Decoration from '$lib/components/Decoration.svelte'
 import FallingStars from '$lib/components/FallingStars.svelte'
 import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
 // import SocialLinks from '$lib/components/SocialLinks.svelte'
-import {translate} from '$lib/i18n/runtime'
+import {translate, type Locale} from '$lib/i18n/runtime'
 
-const {locale, children} = $props()
+const {locale, children} = $props<{locale: Locale; children: Snippet}>()
 </script>

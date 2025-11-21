@@ -107,9 +107,10 @@
 <script lang="ts">
 import {onMount} from 'svelte'
 
-import {translate} from '$lib/i18n/runtime'
+import {translate, type Locale} from '$lib/i18n/runtime'
+import type {Heading} from '$lib/types/manifest'
 
-const {headings, locale} = $props()
+const {headings, locale} = $props<{headings: Heading[]; locale: Locale}>()
 
 let active_id = $state(headings[0]?.id ?? '')
 let is_mobile_open = $state(false)
@@ -134,7 +135,7 @@ onMount(() => {
         {rootMargin: '0px 0px -60% 0px', threshold: 0.1},
     )
 
-    headings.forEach(h => {
+    headings.forEach((h: Heading) => {
         const el = get_element(h.id)
         if (el) observer.observe(el)
     })

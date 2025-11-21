@@ -4,10 +4,10 @@
 
 <script lang="ts">
 import {Button} from '$lib/components/ui/button/index'
-import {build_path_for_locale} from '$lib/i18n/runtime'
+import {build_path_for_locale, type Locale} from '$lib/i18n/runtime'
 import {router} from '$lib/router'
 
-const {locale} = $props<{locale: string}>()
+const {locale} = $props<{locale: Locale}>()
 
 const is_browser = typeof window !== 'undefined'
 const route = is_browser ? router.route : null

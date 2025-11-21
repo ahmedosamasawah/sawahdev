@@ -21,11 +21,11 @@
 
 <svelte:window onmousemove={handleMouseMove} />
 
-<script>
+<script lang="ts">
 let mouseX = $state(-200)
 let mouseY = $state(-200)
 
-function handleMouseMove(e) {
+function handleMouseMove(e: MouseEvent) {
     mouseX = e.clientX
     mouseY = e.clientY
 }

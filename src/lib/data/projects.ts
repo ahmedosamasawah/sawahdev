@@ -1,28 +1,29 @@
+import type {Locale} from '$lib/types/manifest'
+
 import {projects as projects_data} from './projects.js'
+
+type LocalizedString = Record<Locale, string>
+
+type DetailedContent = Record<
+    Locale,
+    {
+        overview: string
+        challenge: string
+        solution: string
+        results: string
+    }
+>
 
 type Project = {
     id: string
-    titles: {en: string; ar: string}
-    descriptions: {en: string; ar: string}
-    role: {en: string; ar: string}
+    titles: LocalizedString
+    descriptions: LocalizedString
+    role: LocalizedString
     tech: string[]
     year?: string
     image?: string
     hasDetailPage?: boolean
-    detailedContent?: {
-        en: {
-            overview: string
-            challenge: string
-            solution: string
-            results: string
-        }
-        ar: {
-            overview: string
-            challenge: string
-            solution: string
-            results: string
-        }
-    }
+    detailedContent?: DetailedContent
     gallery?: string[]
     links: {
         demo?: string

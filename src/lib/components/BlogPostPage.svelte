@@ -77,14 +77,19 @@
     </p>
 {/if}
 
-<script>
+<script lang="ts">
 import PostToc from '$lib/components/PostToc.svelte'
-import manifest from '$lib/data/route-manifest.json'
-import {format_date, translate} from '$lib/i18n/runtime'
+import manifestData from '$lib/data/route-manifest.json'
+import {format_date, translate, type Locale} from '$lib/i18n/runtime'
+import type {BlogPost, RouteManifest} from '$lib/types/manifest'
 
-const {locale, slug} = $props()
+const manifest = manifestData as RouteManifest
 
-const post = $derived(manifest.blogPosts.find(p => p.locale === locale && p.slug === slug))
+const {locale, slug} = $props<{locale: Locale; slug: string}>()
+
+const post = $derived<BlogPost | undefined>(
+    manifest.blogPosts.find(p => p.locale === locale && p.slug === slug),
+)
 const formatted_date = $derived(post && format_date(locale, post.frontmatter.createdAt))
 const article_lang = $derived(post?.is_fallback ? post.source_locale : locale)
 </script>

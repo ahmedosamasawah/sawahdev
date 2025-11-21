@@ -22,7 +22,7 @@
             >
                 <div class="mb-3 flex items-start justify-between gap-3">
                     <h2 class="text-xl leading-tight font-semibold">
-                        {project.titles[locale]}
+                        {project.titles[loc]}
                     </h2>
                     {#if project.year}
                         <span class="text-muted-foreground text-xs font-medium">{project.year}</span
@@ -32,12 +32,12 @@
 
                 <!-- Role -->
                 <p class="text-muted-foreground mb-3 text-sm">
-                    {project.role[locale]}
+                    {project.role[loc]}
                 </p>
 
                 <!-- Description -->
                 <p class="text-muted-foreground mb-4 text-sm leading-relaxed">
-                    {project.descriptions[locale]}
+                    {project.descriptions[loc]}
                 </p>
 
                 <!-- Tech Stack -->
@@ -91,11 +91,14 @@
     </section>
 </div>
 
-<script>
+<script lang="ts">
 import {ExternalLink, Github} from '@lucide/svelte'
 
 import {projects} from '$lib/data/projects'
-import {translate} from '$lib/i18n/runtime'
+import {translate, type Locale} from '$lib/i18n/runtime'
 
-const {locale} = $props()
+const {locale} = $props<{locale: Locale}>()
+
+// Helper to safely access localized content
+const loc = $derived<Locale>(locale as Locale)
 </script>

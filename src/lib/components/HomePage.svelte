@@ -66,15 +66,18 @@
     </section>
 </div>
 
-<script>
-import manifest from '$lib/data/route-manifest.json'
-import {format_date, messages, translate} from '$lib/i18n/runtime'
+<script lang="ts">
+import manifestData from '$lib/data/route-manifest.json'
+import {format_date, messages, translate, type Locale} from '$lib/i18n/runtime'
+import type {BlogPost, RouteManifest} from '$lib/types/manifest'
 
-const {locale} = $props()
+const manifest = manifestData as RouteManifest
 
-const now_items = $derived(messages[locale].home.now)
+const {locale} = $props<{locale: Locale}>()
 
-const recent_posts = $derived(
+const now_items = $derived(messages[locale as Locale].home.now)
+
+const recent_posts = $derived<BlogPost[]>(
     manifest.blogPosts
         .filter(p => p.locale === locale)
         .sort((a, b) => b.frontmatter.createdAt.localeCompare(a.frontmatter.createdAt))

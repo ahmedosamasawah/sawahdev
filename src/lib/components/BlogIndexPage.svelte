@@ -38,13 +38,16 @@
     {/if}
 </div>
 
-<script>
-import manifest from '$lib/data/route-manifest.json'
-import {format_date, translate} from '$lib/i18n/runtime'
+<script lang="ts">
+import manifestData from '$lib/data/route-manifest.json'
+import {format_date, translate, type Locale} from '$lib/i18n/runtime'
+import type {BlogPost, RouteManifest} from '$lib/types/manifest'
 
-const {locale} = $props()
+const manifest = manifestData as RouteManifest
 
-const posts = $derived(
+const {locale} = $props<{locale: Locale}>()
+
+const posts = $derived<BlogPost[]>(
     manifest.blogPosts
         .filter(p => p.locale === locale)
         .sort((a, b) => b.frontmatter.createdAt.localeCompare(a.frontmatter.createdAt)),

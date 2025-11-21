@@ -22,10 +22,10 @@
     </section>
 </div>
 
-<script>
-import {messages, translate} from '$lib/i18n/runtime'
+<script lang="ts">
+import {messages, translate, type Locale} from '$lib/i18n/runtime'
 
-const {locale} = $props()
+const {locale} = $props<{locale: Locale}>()
 
-const paragraphs = $derived(messages[locale].about.body)
+const paragraphs = $derived(messages[locale as Locale].about.body)
 </script>
