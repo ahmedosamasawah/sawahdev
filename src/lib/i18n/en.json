@@ -25,8 +25,18 @@
     },
     "projects": {
         "title": "Projects",
-        "subtitle": "A selection of work I’ve built over the years.",
-        "viewProject": "View project"
+        "subtitle": "A selection of work I've built over the years.",
+        "viewProject": "View project",
+        "viewDetails": "View details",
+        "viewGithub": "View on GitHub",
+        "notFound": "Project not found."
+    },
+    "project": {
+        "overview": "Overview",
+        "challenge": "Challenge",
+        "solution": "Solution",
+        "results": "Results",
+        "gallery": "Gallery"
     },
     "blog": {
         "title": "Blog",

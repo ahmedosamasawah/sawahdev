@@ -26,7 +26,17 @@
     "projects": {
         "title": "مشاريعي",
         "subtitle": "مجموعة من الأعمال التي طورتها خلال السنوات الماضية.",
-        "viewProject": "عرض المشروع"
+        "viewProject": "عرض المشروع",
+        "viewDetails": "عرض التفاصيل",
+        "viewGithub": "عرض على غيتهاب",
+        "notFound": "المشروع غير موجود."
+    },
+    "project": {
+        "overview": "نظرة عامة",
+        "challenge": "التحدي",
+        "solution": "الحل",
+        "results": "النتائج",
+        "gallery": "معرض الصور"
     },
     "blog": {
         "title": "المدونة",

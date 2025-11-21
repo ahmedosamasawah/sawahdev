@@ -2,6 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 
 import { root_dir } from './fs-utils.js'
+import { projects } from './src/lib/data/projects.js'
 
 const locales = ['en', 'ar']
 const static_pages = ['home', 'projects', 'about']
@@ -93,10 +94,30 @@ function build_manifest(blog_posts) {
     })
   }
 
+  // Add project detail page routes
+  for (const project of projects) {
+    if (project.hasDetailPage) {
+      for (const locale of locales) {
+        routes.push({
+          id: `project-${project.id}-${locale}`,
+          locale,
+          type: 'project-detail',
+          name: 'project-detail',
+          path: `/${locale}/projects/${project.id}`,
+          projectId: project.id,
+          data: {
+            project,
+          },
+        })
+      }
+    }
+  }
+
   return {
     locales,
     routes,
     blogPosts: blog_posts_with_fallbacks,
+    projects,
   }
 }
 

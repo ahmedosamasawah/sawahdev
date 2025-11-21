@@ -1,4 +1,4 @@
-<div class="w-full max-w-2xl space-y-12">
+<div class="w-full max-w-4xl space-y-12">
     <section class="space-y-4">
         <h1 class="text-2xl font-semibold">
             {translate(locale, 'projects.title')}
@@ -15,39 +15,75 @@
         </a>
     </section>
 
-    <section class="space-y-8">
+    <section class="grid gap-6 md:grid-cols-2">
         {#each projects as project (project.id)}
-            <article class="space-y-2">
-                <div class="flex flex-wrap items-baseline justify-between gap-2">
-                    <h2 class="text-lg font-semibold">{project.titles[locale]}</h2>
-                    <span class="text-muted-foreground text-xs">{project.role[locale]}</span>
+            <article
+                class="group border-border bg-card hover:border-primary/50 relative overflow-hidden rounded-2xl border p-6 shadow-sm transition-all duration-300 hover:shadow-lg"
+            >
+                <div class="mb-3 flex items-start justify-between gap-3">
+                    <h2 class="text-xl leading-tight font-semibold">
+                        {project.titles[locale]}
+                    </h2>
+                    {#if project.year}
+                        <span class="text-muted-foreground text-xs font-medium">{project.year}</span
+                        >
+                    {/if}
                 </div>
 
-                <p class="text-muted-foreground text-sm leading-relaxed">
+                <!-- Role -->
+                <p class="text-muted-foreground mb-3 text-sm">
+                    {project.role[locale]}
+                </p>
+
+                <!-- Description -->
+                <p class="text-muted-foreground mb-4 text-sm leading-relaxed">
                     {project.descriptions[locale]}
                 </p>
 
-                <div class="flex flex-wrap items-center gap-3 text-xs">
-                    <span class="text-muted-foreground">{project.tech.join(', ')}</span>
-                    {#if project.links.github}
-                        <a
-                            class="hover:text-foreground text-muted-foreground underline decoration-dotted underline-offset-4"
-                            href={project.links.github}
-                            target="_blank"
-                            rel="noreferrer"
+                <!-- Tech Stack -->
+                <div class="mb-4 flex flex-wrap gap-2">
+                    {#each project.tech as tech}
+                        <span
+                            class="bg-primary/10 text-primary rounded-full px-3 py-1 text-xs font-medium"
                         >
-                            github
-                        </a>
-                    {/if}
-                    {#if project.links.demo}
+                            {tech}
+                        </span>
+                    {/each}
+                </div>
+
+                <!-- Links -->
+                <div class="flex gap-3">
+                    {#if project.hasDetailPage}
                         <a
-                            class="hover:text-foreground text-muted-foreground underline decoration-dotted underline-offset-4"
-                            href={project.links.demo}
-                            target="_blank"
-                            rel="noreferrer"
+                            href="/{locale}/projects/{project.id}"
+                            class="bg-primary text-primary-foreground hover:bg-primary/90 flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium transition-all"
                         >
-                            {translate(locale, 'projects.viewProject')}
+                            <ExternalLink size={14} />
+                            {translate(locale, 'projects.viewDetails')}
                         </a>
+                    {:else}
+                        {#if project.links.demo}
+                            <a
+                                href={project.links.demo}
+                                target="_blank"
+                                rel="noreferrer"
+                                class="bg-primary text-primary-foreground hover:bg-primary/90 flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium transition-all"
+                            >
+                                <ExternalLink size={14} />
+                                {translate(locale, 'projects.viewProject')}
+                            </a>
+                        {/if}
+                        {#if project.links.github}
+                            <a
+                                href={project.links.github}
+                                target="_blank"
+                                rel="noreferrer"
+                                class="hover:bg-muted border-border flex items-center gap-1.5 rounded-lg border px-4 py-2 text-sm font-medium transition-all"
+                            >
+                                <Github size={14} />
+                                GitHub
+                            </a>
+                        {/if}
                     {/if}
                 </div>
             </article>
@@ -56,6 +92,8 @@
 </div>
 
 <script>
+import {ExternalLink, Github} from '@lucide/svelte'
+
 import {projects} from '$lib/data/projects'
 import {translate} from '$lib/i18n/runtime'
 

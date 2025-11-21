@@ -307,72 +307,318 @@ hr {
   @apply border-muted-foreground my-4 opacity-10;
 }
 
-/* Prose list styling */
-.prose ul {
-  @apply list-disc pl-6;
+/* ============================================
+   PREMIUM BLOG PROSE STYLES
+   Modern, clean typography inspired by top dev blogs
+   ============================================ */
+
+.blog-article {
+  @apply text-foreground;
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.8;
+  max-width: 75ch;
 }
 
-.prose ol {
-  @apply list-decimal pl-6;
-}
-
-.prose li {
-  @apply my-1;
-}
-
-.prose a {
-  @apply text-foreground decoration-foreground/70 hover:decoration-foreground underline decoration-dotted decoration-1 underline-offset-2 transition-all hover:decoration-solid;
-}
-
+/* Headings with beautiful hierarchy */
 .blog-article h1,
 .blog-article h2,
-.blog-article h3 {
+.blog-article h3,
+.blog-article h4,
+.blog-article h5,
+.blog-article h6 {
+  @apply text-foreground font-semibold;
   scroll-margin-top: 96px;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
 }
 
 .blog-article h1 {
-  @apply text-2xl font-semibold;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
+  @apply text-3xl;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .blog-article h2 {
-  @apply text-xl font-semibold;
-  margin-top: 1.25rem;
-  margin-bottom: 0.5rem;
+  @apply text-2xl;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--primary);
 }
 
 .blog-article h3 {
-  @apply text-lg font-semibold;
-  margin-top: 1rem;
+  @apply text-xl;
+  margin-top: 2rem;
+  margin-bottom: 0.875rem;
+  padding-left: 0.875rem;
+  border-left: 2px solid color-mix(in oklch, var(--muted-foreground) 30%, transparent);
+}
+
+.blog-article h4 {
+  @apply text-lg;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.blog-article h5,
+.blog-article h6 {
+  @apply text-base;
+  margin-top: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
-.blog-article p,
+/* Paragraphs with comfortable spacing */
+.blog-article p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+/* Beautiful links */
+.blog-article a {
+  @apply text-primary font-medium;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklch, var(--primary) 30%, transparent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: all 0.2s ease;
+}
+
+.blog-article a:hover {
+  text-decoration-color: var(--primary);
+  text-decoration-thickness: 2px;
+}
+
+/* Lists with proper spacing */
 .blog-article ul,
 .blog-article ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.75rem;
+}
+
+.blog-article ul {
+  list-style-type: disc;
+}
+
+.blog-article ol {
+  list-style-type: decimal;
+}
+
+.blog-article li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+  padding-left: 0.5rem;
+}
+
+.blog-article li::marker {
+  @apply text-muted-foreground;
+}
+
+.blog-article ul ul,
+.blog-article ol ol,
+.blog-article ul ol,
+.blog-article ol ul {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Blockquotes - elegant and readable */
+.blog-article blockquote {
+  @apply bg-accent/5 border-accent border-l-4;
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 0.75rem 0.75rem 0;
+  font-style: italic;
+}
+
+.blog-article blockquote p {
+  margin-bottom: 0;
+}
+
+.blog-article blockquote p:not(:last-child) {
   margin-bottom: 1rem;
 }
 
-.blog-article blockquote {
-  @apply border-accent/60 bg-accent/10 text-foreground rounded-lg border-l-4 px-4 py-3;
-  margin: 1rem 0;
+/* Inline code - subtle and clean, always LTR */
+.blog-article :not(pre) > code {
+  padding: 0;
+  font-size: 0.875em;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-weight: 400;
+  background: none;
+  color: #ff7b54;
+  border: none;
+  white-space: nowrap;
+  /* Force LTR for code even in RTL context */
+  direction: ltr;
+  unicode-bidi: embed;
 }
 
-.blog-article code {
-  @apply bg-muted rounded px-1.5 py-0.5 font-mono text-sm;
+.dark .blog-article :not(pre) > code {
+  color: #ffb366;
 }
 
-.blog-article pre {
-  @apply bg-muted text-foreground border-border overflow-auto rounded-lg border p-4 text-sm;
+/* Code blocks - styled exactly like VS Code */
+.blog-article pre.shiki {
+  margin: 2rem 0;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  padding: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 0.15);
+  /* Let Shiki control the background color completely */
+  /* background is set inline by Shiki */
 }
 
-.blog-article pre code {
-  @apply rounded-none bg-transparent p-0;
+/* Don't override Shiki's background or color */
+.blog-article pre.shiki code {
+  display: block;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: inherit;
+  line-height: inherit;
+  font-family: inherit;
+  color: inherit;
 }
 
+/* Preserve line structure */
+.blog-article pre.shiki .line {
+  display: inline-block;
+  min-width: 100%;
+}
+
+/* Fallback for non-Shiki code blocks */
+.blog-article pre:not(.shiki) {
+  @apply bg-muted text-foreground border-border;
+  margin: 2rem 0;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  padding: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  border: 1px solid color-mix(in oklch, var(--border) 50%, transparent);
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+}
+
+.blog-article pre:not(.shiki) code {
+  background: transparent;
+  padding: 0;
+  border: none;
+}
+
+/* Images - centered with subtle shadow */
 .blog-article img {
-  @apply rounded-lg;
+  @apply rounded-2xl;
+  margin: 2.5rem auto;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  box-shadow:
+    0 10px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+  border: 1px solid color-mix(in oklch, var(--border) 30%, transparent);
+}
+
+/* Tables - clean and striped */
+.blog-article table {
+  width: 100%;
+  margin: 2rem 0;
+  border-collapse: collapse;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+}
+
+.blog-article thead {
+  @apply bg-muted;
+}
+
+.blog-article th {
+  @apply text-foreground font-semibold;
+  padding: 0.875rem 1rem;
+  text-align: left;
+  font-size: 0.9375rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.blog-article td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid color-mix(in oklch, var(--border) 50%, transparent);
+}
+
+.blog-article tbody tr:nth-child(even) {
+  @apply bg-muted/30;
+}
+
+.blog-article tbody tr:hover {
+  @apply bg-muted/50;
+  transition: background-color 0.15s ease;
+}
+
+.blog-article tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Horizontal rules */
+.blog-article hr {
+  @apply border-border;
+  margin: 3rem 0;
+  border-top-width: 1px;
+  opacity: 0.3;
+}
+
+/* Strong and emphasis */
+.blog-article strong {
+  @apply text-foreground font-semibold;
+}
+
+.blog-article em {
+  font-style: italic;
+}
+
+/* Figures and captions */
+.blog-article figure {
+  margin: 2rem 0;
+}
+
+.blog-article figcaption {
+  @apply text-muted-foreground text-center;
+  margin-top: 0.75rem;
+  font-size: 0.9375rem;
+  font-style: italic;
+}
+
+/* Callout/Admonition styling */
+.blog-article .callout {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.blog-article .callout-content p:last-child {
+  margin-bottom: 0;
+}
+
+.blog-article .callout-content p {
+  margin-bottom: 0.75rem;
+}
+
+.blog-article .callout-content strong {
+  font-weight: 600;
+}
+
+.blog-article .callout-content code {
+  font-size: 0.875em;
+  padding: 0.125em 0.375em;
+  border-radius: 0.25rem;
+  background: rgb(0 0 0 / 0.1);
+  border: none;
+}
+
+.dark .blog-article .callout-content code {
+  background: rgb(255 255 255 / 0.1);
 }
 
 /* Falling stars helper */

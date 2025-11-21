@@ -34,6 +34,8 @@
         <BlogIndexPage {locale} />
     {:else if page === 'blog-post'}
         <BlogPostPage {locale} slug={blog_slug} />
+    {:else if page === 'project-detail'}
+        <ProjectPage {locale} projectId={project_id} />
     {:else}
         <p class="text-center">TODO route: {page}</p>
     {/if}
@@ -45,12 +47,13 @@ import BlogIndexPage from '$lib/components/BlogIndexPage.svelte'
 import BlogPostPage from '$lib/components/BlogPostPage.svelte'
 import HomePage from '$lib/components/HomePage.svelte'
 import Layout from '$lib/components/Layout.svelte'
+import ProjectPage from '$lib/components/ProjectPage.svelte'
 import ProjectsPage from '$lib/components/ProjectsPage.svelte'
 import {locale_from_path} from '$lib/i18n/runtime'
 import {router} from '$lib/router'
 
 const props = $props<{
-    route?: {path: string; name: string; slug?: string}
+    route?: {path: string; name: string; slug?: string; projectId?: string}
     locale?: string
     data?: any
     seo?: any
@@ -67,10 +70,12 @@ const page = $derived.by(() => {
     if (props.route?.name) return props.route.name
     if (!section) return 'home'
     if (section === 'blog') return segments[2] ? 'blog-post' : 'blog-index'
+    if (section === 'projects' && segments[2]) return 'project-detail'
     return section
 })
 
 const blog_slug = $derived(props.route?.slug ?? segments[2] ?? '')
+const project_id = $derived(props.route?.projectId ?? segments[2] ?? '')
 const seo = $derived(props.seo)
 
 $effect(() => {
