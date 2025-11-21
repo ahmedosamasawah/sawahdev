@@ -75,7 +75,7 @@ const manifest = manifestData as RouteManifest
 
 const {locale} = $props<{locale: Locale}>()
 
-const now_items = $derived(messages[locale as Locale].home.now)
+const now_items = $derived(messages[locale as keyof typeof messages].home.now)
 
 const recent_posts = $derived<BlogPost[]>(
     manifest.blogPosts

@@ -30,7 +30,7 @@ export interface RouteManifest {
     locales: Locale[]
     routes: RouteEntry[]
     blogPosts: BlogPost[]
-    projects: any[]
+    projects: unknown[] // Projects are defined in projects.ts to avoid circular dependency
 }
 
 interface RouteEntry {

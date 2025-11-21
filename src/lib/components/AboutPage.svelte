@@ -27,5 +27,5 @@ import {messages, translate, type Locale} from '$lib/i18n/runtime'
 
 const {locale} = $props<{locale: Locale}>()
 
-const paragraphs = $derived(messages[locale as Locale].about.body)
+const paragraphs = $derived(messages[locale as keyof typeof messages].about.body)
 </script>
