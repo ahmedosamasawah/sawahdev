@@ -1,9 +1,8 @@
-<Button variant="link" size="sm" onclick={switch_locale}>
+<button type="button" class="link" onclick={switch_locale}>
     {locale === 'en' ? 'العربية' : 'English'}
-</Button>
+</button>
 
 <script lang="ts">
-import {Button} from '$lib/components/ui/button/index'
 import {build_path_for_locale} from '$lib/i18n/runtime'
 import {router} from '$lib/router'
 

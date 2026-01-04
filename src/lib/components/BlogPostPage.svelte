@@ -1,7 +1,5 @@
 {#if post}
-    <!-- Two-column layout container -->
-    <div class="mx-auto w-full max-w-screen-xl px-6 lg:flex lg:justify-between lg:gap-8 lg:px-24">
-        <!-- Left sidebar: Sticky TOC -->
+    <div class="mx-auto w-full max-w-7xl px-6 lg:flex lg:justify-between lg:gap-8 lg:px-24">
         {#if post.headings.length}
             <div
                 class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-start lg:py-24"
@@ -19,7 +17,6 @@
             </div>
         {/if}
 
-        <!-- Right content area -->
         <main class="pt-12 lg:w-[52%] lg:py-24">
             <div class="mb-8 lg:hidden">
                 <a
@@ -63,7 +60,6 @@
                 {@html post.html}
             </article>
 
-            <!-- Mobile TOC -->
             {#if post.headings.length}
                 <div class="mt-12 lg:hidden">
                     <PostToc headings={post.headings} {locale} />

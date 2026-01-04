@@ -1,6 +1,5 @@
 <div class="relative flex min-h-screen flex-col">
     <Decoration />
-    <FallingStars />
 
     <header class="flex items-center justify-end px-6 py-4">
         <LanguageSwitcher {locale} />
@@ -52,7 +51,6 @@
 
 <script>
 import Decoration from '$lib/components/Decoration.svelte'
-import FallingStars from '$lib/components/FallingStars.svelte'
 import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
 // import SocialLinks from '$lib/components/SocialLinks.svelte'
 import {translate} from '$lib/i18n/runtime'
