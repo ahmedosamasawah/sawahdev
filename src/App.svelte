@@ -61,7 +61,12 @@ const props = $props<{
 
 const is_browser = typeof window !== 'undefined'
 const client_route = is_browser ? router.route : null
-const pathname = $derived(props.route?.path ?? $client_route?.url.pathname ?? '/')
+const raw_pathname = $derived(props.route?.path ?? $client_route?.url.pathname ?? '/')
+const pathname = $derived(
+    raw_pathname.startsWith('/sawahdev/')
+        ? raw_pathname.slice('/sawahdev'.length) || '/'
+        : raw_pathname,
+)
 const segments = $derived(pathname.split('/').filter(Boolean))
 const locale = $derived(props.locale ?? locale_from_path(pathname))
 const section = $derived(segments[1] ?? '')

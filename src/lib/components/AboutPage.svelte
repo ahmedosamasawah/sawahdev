@@ -7,7 +7,7 @@
             {translate(locale, 'about.subtitle')}
         </p>
         <a
-            href="/{locale}"
+            href="{base_url}{locale}"
             class="hover:text-foreground text-muted-foreground block text-sm underline decoration-dotted underline-offset-4"
         >
             {translate(locale, 'common.backArrow')}
@@ -22,10 +22,10 @@
     </section>
 </div>
 
-<script>
-import {messages, translate} from '$lib/i18n/runtime'
+<script lang="ts">
+import {base_url, type Locale, messages, translate} from '$lib/i18n/runtime'
 
 const {locale} = $props()
 
-const paragraphs = $derived(messages[locale].about.body)
+const paragraphs = $derived(messages[locale as Locale].about.body)
 </script>

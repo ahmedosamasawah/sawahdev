@@ -6,7 +6,7 @@
             >
                 <div class="hidden lg:block">
                     <a
-                        href="/{locale}/blog"
+                        href="{base_url}{locale}/blog"
                         class="hover:text-foreground text-muted-foreground mb-8 block text-sm underline decoration-dotted underline-offset-4"
                     >
                         {translate(locale, 'common.backArrow')}
@@ -20,7 +20,7 @@
         <main class="pt-12 lg:w-[52%] lg:py-24">
             <div class="mb-8 lg:hidden">
                 <a
-                    href="/{locale}/blog"
+                    href="{base_url}{locale}/blog"
                     class="hover:text-foreground text-muted-foreground block text-sm underline decoration-dotted underline-offset-4"
                 >
                     {translate(locale, 'common.backArrow')}
@@ -76,7 +76,7 @@
 <script>
 import PostToc from '$lib/components/PostToc.svelte'
 import manifest from '$lib/data/route-manifest.json'
-import {format_date, translate} from '$lib/i18n/runtime'
+import {base_url, format_date, translate} from '$lib/i18n/runtime'
 
 const {locale, slug} = $props()
 

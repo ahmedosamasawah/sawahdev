@@ -11,13 +11,13 @@
         </div>
 
         <div class="flex flex-wrap gap-3 text-sm">
-            <a href="/{locale}/projects" class="link">
+            <a href="{base_url}{locale}/projects" class="link">
                 {translate(locale, 'common.nav.projects')}
             </a>
-            <a href="/{locale}/blog" class="link">
+            <a href="{base_url}{locale}/blog" class="link">
                 {translate(locale, 'common.nav.blog')}
             </a>
-            <a href="/{locale}/about" class="link">
+            <a href="{base_url}{locale}/about" class="link">
                 {translate(locale, 'common.nav.about')}
             </a>
         </div>
@@ -45,10 +45,7 @@
             <div class="space-y-3">
                 {#each recent_posts as post (post.slug)}
                     <div class="space-y-1">
-                        <a
-                            href="/{locale}/blog/{post.slug}"
-                            class="hover:text-foreground block text-base underline decoration-dotted underline-offset-4"
-                        >
+                        <a href="{base_url}{locale}/blog/{post.slug}" class="block space-y-2">
                             {post.frontmatter.title}
                         </a>
                         <time class="text-muted-foreground block text-xs">
@@ -63,7 +60,7 @@
 
 <script lang="ts">
 import manifest from '$lib/data/route-manifest.json'
-import {format_date, type Locale, messages, translate} from '$lib/i18n/runtime'
+import {base_url, format_date, type Locale, messages, translate} from '$lib/i18n/runtime'
 
 const {locale} = $props<{locale: Locale}>()
 

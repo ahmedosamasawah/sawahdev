@@ -1,9 +1,8 @@
 {#if project}
     <div class="w-full max-w-4xl space-y-12">
-        <!-- Header -->
         <section class="space-y-4">
             <a
-                href="/{locale}/projects"
+                href="{base_url}{locale}/projects"
                 class="hover:text-foreground text-muted-foreground block text-sm underline decoration-dotted underline-offset-4"
             >
                 {translate(locale, 'common.backArrow')}
@@ -22,7 +21,6 @@
                 {/if}
             </div>
 
-            <!-- Tech Stack -->
             <div class="flex flex-wrap gap-2">
                 {#each project.tech as tech}
                     <span
@@ -34,7 +32,6 @@
             </div>
         </section>
 
-        <!-- Main Image -->
         {#if project.image}
             <section>
                 <img
@@ -45,30 +42,25 @@
             </section>
         {/if}
 
-        <!-- Content Sections -->
         {#if project.detailedContent}
             {@const content = project.detailedContent[locale]}
 
             <section class="space-y-8">
-                <!-- Overview -->
                 <div class="space-y-3">
                     <h2 class="text-2xl font-semibold">{translate(locale, 'project.overview')}</h2>
                     <p class="text-muted-foreground leading-relaxed">{content.overview}</p>
                 </div>
 
-                <!-- Challenge -->
                 <div class="space-y-3">
                     <h2 class="text-2xl font-semibold">{translate(locale, 'project.challenge')}</h2>
                     <p class="text-muted-foreground leading-relaxed">{content.challenge}</p>
                 </div>
 
-                <!-- Solution -->
                 <div class="space-y-3">
                     <h2 class="text-2xl font-semibold">{translate(locale, 'project.solution')}</h2>
                     <p class="text-muted-foreground leading-relaxed">{content.solution}</p>
                 </div>
 
-                <!-- Results -->
                 <div class="space-y-3">
                     <h2 class="text-2xl font-semibold">{translate(locale, 'project.results')}</h2>
                     <p class="text-muted-foreground leading-relaxed">{content.results}</p>
@@ -76,7 +68,6 @@
             </section>
         {/if}
 
-        <!-- Gallery -->
         {#if project.gallery && project.gallery.length > 0}
             <section class="space-y-6">
                 <h2 class="text-2xl font-semibold">{translate(locale, 'project.gallery')}</h2>
@@ -94,7 +85,6 @@
             </section>
         {/if}
 
-        <!-- Links -->
         {#if project.links.demo || project.links.github}
             <section class="border-border border-t pt-8">
                 <div class="flex gap-3">
@@ -130,12 +120,12 @@
     </div>
 {/if}
 
-<script>
+<script lang="ts">
 import {ExternalLink, Github} from '@lucide/svelte'
 
 import {projects} from '$lib/data/projects'
-import {translate} from '$lib/i18n/runtime'
+import {base_url, type Locale, translate} from '$lib/i18n/runtime'
 
-const {locale, projectId} = $props()
+const {locale, projectId}: {locale: Locale; projectId: string} = $props()
 const project = $derived(projects.find(p => p.id === projectId))
 </script>

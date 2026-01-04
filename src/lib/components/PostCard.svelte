@@ -1,7 +1,7 @@
 <article
     class="border-border bg-card hover:border-accent rounded-lg border p-4 text-left transition"
 >
-    <a href="/{locale}/blog/{post.slug}" class="block space-y-2">
+    <a href="{base_url}{locale}/blog/{post.slug}" class="block space-y-2">
         <h3 class="text-base font-semibold">
             {post.frontmatter.title}
         </h3>
@@ -28,7 +28,7 @@
 </article>
 
 <script>
-import {format_date, translate} from '$lib/i18n/runtime'
+import {base_url, format_date, translate} from '$lib/i18n/runtime'
 
 const {locale, post} = $props()
 

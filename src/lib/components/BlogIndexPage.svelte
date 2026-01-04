@@ -7,7 +7,7 @@
             {translate(locale, 'blog.subtitle')}
         </p>
         <a
-            href="/{locale}"
+            href="{base_url}{locale}"
             class="hover:text-foreground text-muted-foreground block text-sm underline decoration-dotted underline-offset-4"
         >
             {translate(locale, 'common.backArrow')}
@@ -28,12 +28,12 @@
     {/if}
 </div>
 
-<script>
+<script lang="ts">
 import PostCard from '$lib/components/PostCard.svelte'
 import manifest from '$lib/data/route-manifest.json'
-import {translate} from '$lib/i18n/runtime'
+import {base_url, type Locale, translate} from '$lib/i18n/runtime'
 
-const {locale} = $props()
+const {locale} = $props<{locale: Locale}>()
 
 const posts = $derived(
     manifest.blogPosts

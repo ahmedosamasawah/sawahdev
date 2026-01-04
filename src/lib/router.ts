@@ -59,7 +59,7 @@ const is_browser = typeof window !== 'undefined'
 
 export const router = is_browser
     ? new Navgo(routes, {
-          base: '/',
+          base: '/sawahdev/',
           tick,
           before_navigate() {},
           after_navigate() {},

@@ -15,19 +15,41 @@ function translate(locale: Locale, key: string): string {
 }
 
 function locale_from_path(pathname: string): Locale | undefined {
-    const segment = pathname.split('/').filter(Boolean)[0]
+    const base = '/sawahdev/'
+    let clean_path = pathname
+    if (pathname.startsWith(base)) {
+        clean_path = pathname.slice(base.length)
+        if (!clean_path.startsWith('/')) clean_path = '/' + clean_path
+    }
+
+    const segment = clean_path.split('/').filter(Boolean)[0]
     const [defaultLocale] = Object.keys(messages) as Locale[]
     return segment in messages ? (segment as Locale) : defaultLocale
 }
 
 function build_path_for_locale(pathname: string, locale: Locale): string {
-    const segments = pathname.split('/').filter(Boolean)
-    const current = locale_from_path(pathname)
+    const base = '/sawahdev/'
+    let clean_path = pathname
 
-    if (segments[0] === current) segments[0] = locale
+    if (pathname.startsWith(base)) {
+        clean_path = pathname.slice(base.length)
+        if (!clean_path.startsWith('/')) clean_path = '/' + clean_path
+    }
+
+    const segments = clean_path.split('/').filter(Boolean)
+
+    const clean_segment = segments[0]
+    const is_locale_segment = clean_segment in messages
+
+    if (is_locale_segment) segments[0] = locale
     else segments.unshift(locale)
 
-    return '/' + segments.join('/')
+    let new_path = '/' + segments.join('/')
+
+    const base_no_slash = base.endsWith('/') ? base.slice(0, -1) : base
+    new_path = base_no_slash + new_path
+
+    return new_path
 }
 
 function format_date(locale: Locale, value: string | Date): string {
@@ -41,5 +63,7 @@ function format_date(locale: Locale, value: string | Date): string {
         day: 'numeric',
     }).format(date)
 }
+
+export const base_url = '/sawahdev/'
 
 export {build_path_for_locale, format_date, type Locale, locale_from_path, messages, translate}

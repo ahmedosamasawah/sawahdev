@@ -1,6 +1,6 @@
-<button type="button" class="link" onclick={switch_locale}>
+<a href={next_url} class="link">
     {locale === 'en' ? 'العربية' : 'English'}
-</button>
+</a>
 
 <script lang="ts">
 import {build_path_for_locale} from '$lib/i18n/runtime'
@@ -12,11 +12,6 @@ const is_browser = typeof window !== 'undefined'
 const route = is_browser ? router.route : null
 
 const current_path = $derived($route?.url?.pathname ?? `/${locale}`)
-
-function switch_locale() {
-    if (!is_browser || !router) return
-
-    const next = locale === 'en' ? 'ar' : 'en'
-    router.goto(build_path_for_locale(current_path, next))
-}
+const next_locale = $derived(locale === 'en' ? 'ar' : 'en')
+const next_url = $derived(build_path_for_locale(current_path, next_locale))
 </script>

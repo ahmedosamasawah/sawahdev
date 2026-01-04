@@ -7,7 +7,7 @@
             {translate(locale, 'projects.subtitle')}
         </p>
         <a
-            href="/{locale}"
+            href="{base_url}{locale}"
             class="hover:text-foreground text-muted-foreground block text-sm underline decoration-dotted underline-offset-4"
         >
             {translate(locale, 'common.backArrow')}
@@ -30,17 +30,14 @@
                     {/if}
                 </div>
 
-                <!-- Role -->
                 <p class="text-muted-foreground mb-3 text-sm">
                     {project.role[locale]}
                 </p>
 
-                <!-- Description -->
                 <p class="text-muted-foreground mb-4 text-sm leading-relaxed">
                     {project.descriptions[locale]}
                 </p>
 
-                <!-- Tech Stack -->
                 <div class="mb-4 flex flex-wrap gap-2">
                     {#each project.tech as tech}
                         <span
@@ -51,11 +48,10 @@
                     {/each}
                 </div>
 
-                <!-- Links -->
                 <div class="flex gap-3">
                     {#if project.hasDetailPage}
                         <a
-                            href="/{locale}/projects/{project.id}"
+                            href="{base_url}{locale}/projects/{project.id}"
                             class="bg-primary text-primary-foreground hover:bg-primary/90 flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium transition-all"
                         >
                             <ExternalLink size={14} />
@@ -91,11 +87,11 @@
     </section>
 </div>
 
-<script>
+<script lang="ts">
 import {ExternalLink, Github} from '@lucide/svelte'
 
 import {projects} from '$lib/data/projects'
-import {translate} from '$lib/i18n/runtime'
+import {base_url, type Locale, translate} from '$lib/i18n/runtime'
 
-const {locale} = $props()
+const {locale}: {locale: Locale} = $props()
 </script>

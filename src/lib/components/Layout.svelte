@@ -3,14 +3,14 @@
 
     <header class="flex items-center justify-between px-6 py-4">
         <a
-            href="/{locale}"
+            href="{base_url}{locale}"
             class={[
                 'transition-all hover:translate-y-2 hover:scale-150',
                 locale === 'ar' ? 'hover:-translate-x-2' : 'hover:translate-x-2',
             ]}
         >
             <img
-                src={locale === 'ar' ? '/ar-logo.gif' : '/en-logo.gif'}
+                src={locale === 'ar' ? `${base_url}ar-logo.gif` : `${base_url}en-logo.gif`}
                 alt="Logo"
                 class="size-12"
             />
@@ -33,7 +33,7 @@
                 rel="noopener"
                 aria-label="GitHub"
             >
-                <img src="/github.svg" alt="GitHub" class="h-6 w-6" />
+                <img src="{base_url}github.svg" alt="GitHub" class="h-6 w-6" />
             </a>
             <a
                 href="https://www.linkedin.com/in/ahmedosamadev"
@@ -42,7 +42,7 @@
                 rel="noopener"
                 aria-label="LinkedIn"
             >
-                <img src="/linkedin.svg" alt="LinkedIn" class="size-12" />
+                <img src="{base_url}linkedin.svg" alt="LinkedIn" class="size-12" />
             </a>
         </div>
         <a
@@ -59,7 +59,7 @@
 <script>
 import Decoration from '$lib/components/Decoration.svelte'
 import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
-import {translate} from '$lib/i18n/runtime'
+import {base_url, translate} from '$lib/i18n/runtime'
 
 const {locale, children} = $props()
 </script>
