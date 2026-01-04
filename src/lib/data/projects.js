@@ -34,7 +34,7 @@ const projects = [
         },
         tech: ['svelte 5', 'vite', 'navgo', 'wuchale'],
         year: '2024',
-        image: '/vite.svg',
+        image: '/en-logo.gif',
         links: {
             github: 'https://github.com/AhmedOsamaDev',
         },
@@ -55,7 +55,7 @@ const projects = [
         },
         tech: ['svelte 5', 'tailwind', 'lucide'],
         year: '2025',
-        image: '/vite.svg',
+        image: '/en-logo.gif',
         links: {
             demo: 'https://ahmedosama.dev',
             github: 'https://github.com/AhmedOsamaDev',
@@ -77,7 +77,7 @@ const projects = [
         },
         tech: ['playwright', 'terser', 'rollup'],
         year: '2024',
-        image: '/vite.svg',
+        image: '/en-logo.gif',
         hasDetailPage: true,
         detailedContent: {
             en: {

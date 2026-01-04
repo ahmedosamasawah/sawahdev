@@ -288,7 +288,7 @@ h3 {
 }
 
 .link {
-  @apply hover:text-foreground text-muted-foreground underline decoration-dotted underline-offset-4;
+  @apply hover:text-foreground text-muted-foreground cursor-pointer underline decoration-dotted underline-offset-4;
 }
 
 hr {

@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node build.js",
+    "build": "npm run build:data && node build.js",
     "build:client": "vite build",
+    "build:data": "node scripts/generate-manifest.js",
     "build:ssg": "node build.js",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",

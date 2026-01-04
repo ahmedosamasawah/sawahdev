@@ -22,25 +22,16 @@
     {:else}
         <section class="space-y-4">
             {#each posts as post (post.slug)}
-                <div class="space-y-1">
-                    <a
-                        href="/{locale}/blog/{post.slug}"
-                        class="hover:text-foreground block text-base underline decoration-dotted underline-offset-4"
-                    >
-                        {post.frontmatter.title}
-                    </a>
-                    <time class="text-muted-foreground block text-xs">
-                        {format_date(locale, post.frontmatter.createdAt)}
-                    </time>
-                </div>
+                <PostCard {post} {locale} />
             {/each}
         </section>
     {/if}
 </div>
 
 <script>
+import PostCard from '$lib/components/PostCard.svelte'
 import manifest from '$lib/data/route-manifest.json'
-import {format_date, translate} from '$lib/i18n/runtime'
+import {translate} from '$lib/i18n/runtime'
 
 const {locale} = $props()
 
