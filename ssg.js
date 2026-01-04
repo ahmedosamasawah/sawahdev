@@ -4,7 +4,7 @@ import path from 'node:path'
 import { render as svelte_render } from 'svelte/server'
 import { createServer } from 'vite'
 
-import { dist_dir,root_dir } from './fs-utils.js'
+import { base_path, dist_dir, root_dir } from './fs-utils.js'
 import { build_seo } from './seo.js'
 
 function route_path_to_file(pathname) {
@@ -13,7 +13,6 @@ function route_path_to_file(pathname) {
   const dir = path.join(dist_dir, ...segments)
   return path.join(dir, 'index.html')
 }
-
 
 function escape_attr(text) {
   if (!text) return ''
@@ -91,12 +90,16 @@ async function ssg_routes(manifest, i18n, assets) {
     }
 
     const default_locale = manifest.locales?.[0] || 'en'
+
+    const clean_base = base_path.endsWith('/') ? base_path : `${base_path}/`
+    const redirect_url = `${clean_base}${default_locale}/`
+
     const root_redirect = `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="0; url=/${default_locale}/">
-    <link rel="canonical" href="/${default_locale}/">
+    <meta http-equiv="refresh" content="0; url=${redirect_url}">
+    <link rel="canonical" href="${redirect_url}">
   </head>
   <body></body>
 </html>

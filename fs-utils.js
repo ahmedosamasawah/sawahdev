@@ -36,5 +36,7 @@ async function clean_dist() {
   await fs.mkdir(dist_dir, { recursive: true })
 }
 
-export { root_dir, dist_dir, file_exists, copy_dir, clean_dist }
+const base_path = '/sawahdev/'
+
+export { base_path,clean_dist, copy_dir, dist_dir, file_exists, root_dir }
 
