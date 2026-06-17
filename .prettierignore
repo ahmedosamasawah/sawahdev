@@ -1,9 +1,10 @@
-/*
-!/src
-!/deploy.js
-!/eslint.config.js
-!/svelte.config.js
-!/tailwind.config.js
-!/vite.config.js
-!/prettier.config.js
-!/playwright.config.js
+# Package Managers
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lock
+bun.lockb
+
+# Miscellaneous
+/static/
+AGENTS.md

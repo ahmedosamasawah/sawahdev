@@ -1,15 +1,23 @@
-import { svelte } from '@sveltejs/vite-plugin-svelte';
 import tailwindcss from '@tailwindcss/vite';
-import path from "path";
+import adapter from '@sveltejs/adapter-static';
+import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
-// https://vite.dev/config/
+const dev = process.argv.includes('dev');
+
 export default defineConfig({
-    plugins: [tailwindcss(), svelte()],
-    base: "/sawahdev/",
-    resolve: {
-        alias: {
-            $lib: path.resolve("./src/lib"),
-        },
-    }
+	plugins: [
+		tailwindcss(),
+		sveltekit({
+			paths: {
+				base: dev ? '' : '/sawahdev'
+			},
+			compilerOptions: {
+				// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
+				runes: ({ filename }) =>
+					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
+			},
+			adapter: adapter()
+		})
+	]
 });
