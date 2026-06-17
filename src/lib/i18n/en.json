@@ -1,63 +1,63 @@
 {
-    "common": {
-        "siteTitle": "Ahmed Osama | Software Engineer",
-        "backArrow": "←",
-        "nav": {
-            "home": "Home",
-            "projects": "Projects",
-            "blog": "Blog",
-            "about": "About"
-        },
-        "footer": {
-            "sourceCode": "Source code"
-        }
-    },
-    "home": {
-        "greeting": "hey, I'm Ahmed 👋",
-        "intro": "I am a Software Engineer building reliable web products. I work with Svelte and TypeScript. I design clear user experiences and write about practical web development.",
-        "nowTitle": "Now",
-        "now": [
-            "Building a custom Svelte 5 static site generator with bilingual support",
-            "Exploring performance optimization patterns in modern web apps",
-            "Writing about practical web development and architecture decisions"
-        ],
-        "recentPostsTitle": "Recent Posts"
-    },
-    "projects": {
-        "title": "Projects",
-        "subtitle": "A selection of work I've built over the years.",
-        "viewProject": "View project",
-        "viewDetails": "View details",
-        "viewGithub": "View on GitHub",
-        "notFound": "Project not found."
-    },
-    "project": {
-        "overview": "Overview",
-        "challenge": "Challenge",
-        "solution": "Solution",
-        "results": "Results",
-        "gallery": "Gallery"
-    },
-    "blog": {
-        "title": "Blog",
-        "subtitle": "Technical notes and thoughts from day-to-day development.",
-        "noPosts": "No posts yet.",
-        "postNotFound": "Post not found.",
-        "fallbackNotice": "This article is only available in the default language. Showing the original version.",
-        "tags": "Tags",
-        "toc": "Table of contents",
-        "prevSection": "Previous",
-        "nextSection": "Next",
-        "prevArrow": "←",
-        "nextArrow": "→"
-    },
-    "about": {
-        "title": "About Me",
-        "subtitle": "A software engineer who values clarity, maintainability, and real-world problem-solving.",
-        "body": [
-            "I focus on building clear, maintainable web products with Svelte and small tooling.",
-            "Recent work includes a custom static site generator, bilingual portfolios, and performance audits.",
-            "I like simple stacks, explicit manifests, and shipping without surprise magic."
-        ]
-    }
+	"common": {
+		"siteTitle": "Ahmed Osama | Software Engineer",
+		"backArrow": "←",
+		"nav": {
+			"home": "Home",
+			"projects": "Projects",
+			"blog": "Blog",
+			"about": "About"
+		},
+		"footer": {
+			"sourceCode": "Source code"
+		}
+	},
+	"home": {
+		"greeting": "hey, I'm Ahmed 👋",
+		"intro": "I am a Software Engineer building reliable web products. I work with Svelte and TypeScript. I design clear user experiences and write about practical web development.",
+		"nowTitle": "Now",
+		"now": [
+			"Building a custom Svelte 5 static site generator with bilingual support",
+			"Exploring performance optimization patterns in modern web apps",
+			"Writing about practical web development and architecture decisions"
+		],
+		"recentPostsTitle": "Recent Posts"
+	},
+	"projects": {
+		"title": "Projects",
+		"subtitle": "A selection of work I've built over the years.",
+		"viewProject": "View project",
+		"viewDetails": "View details",
+		"viewGithub": "View on GitHub",
+		"notFound": "Project not found."
+	},
+	"project": {
+		"overview": "Overview",
+		"challenge": "Challenge",
+		"solution": "Solution",
+		"results": "Results",
+		"gallery": "Gallery"
+	},
+	"blog": {
+		"title": "Blog",
+		"subtitle": "Technical notes and thoughts from day-to-day development.",
+		"noPosts": "No posts yet.",
+		"postNotFound": "Post not found.",
+		"fallbackNotice": "This article is only available in the default language. Showing the original version.",
+		"tags": "Tags",
+		"toc": "Table of contents",
+		"prevSection": "Previous",
+		"nextSection": "Next",
+		"prevArrow": "←",
+		"nextArrow": "→"
+	},
+	"about": {
+		"title": "About Me",
+		"subtitle": "A software engineer who values clarity, maintainability, and real-world problem-solving.",
+		"body": [
+			"I focus on building clear, maintainable web products with Svelte and small tooling.",
+			"Recent work includes a custom static site generator, bilingual portfolios, and performance audits.",
+			"I like simple stacks, explicit manifests, and shipping without surprise magic."
+		]
+	}
 }
