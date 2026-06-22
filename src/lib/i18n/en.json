@@ -16,13 +16,41 @@
 		],
 		"featuredProjectsTitle": "Projects I contributed to",
 		"featuredProjects": [
-			{ "name": "Quran.com", "url": "https://quran.com/" },
-			{ "name": "Dalail Academy", "url": "https://academy.dalail.net/" },
-			{ "name": "Tafsir", "url": "https://tafsir.app/" },
-			{ "name": "Muqri", "url": "https://en.muqri.com/" },
-			{ "name": "Tools", "url": "https://tools.slk.is/" },
-			{ "name": "Nadira", "url": "https://www.nadira-eg.com/" },
-			{ "name": "Takwin", "url": "https://takwin.slk.is/" }
+			{
+				"name": "Quran.com",
+				"url": "https://quran.com/",
+				"description": "Contributed to interactive lessons, lesson ayahs, review cards, quizzes, articles, Quranic topics, and learning experiences."
+			},
+			{
+				"name": "Dalail Academy",
+				"url": "https://academy.dalail.net/",
+				"description": "Contributed to admin dashboards, student management, surveys, messages, reports, analytics, and data export."
+			},
+			{
+				"name": "Tafsir",
+				"url": "https://tafsir.app/",
+				"description": "Contributed to improving the Mushaf and search experience, source display, tafsir tools, mobile UI, and some data import and organization work."
+			},
+			{
+				"name": "Muqri",
+				"url": "https://en.muqri.com/",
+				"description": "Contributed to improving the player, ayah repetition, progress sync, reading and listening settings, and the mobile and iOS experience."
+			},
+			{
+				"name": "Tools",
+				"url": "https://tools.slk.is/",
+				"description": "Contributed to Arabic and Quran text tools, Mushaf settings, ayah copying, audio tools, and some AI integrations."
+			},
+			{
+				"name": "Nadira",
+				"url": "https://www.nadira-eg.com/",
+				"description": "Built from scratch."
+			},
+			{
+				"name": "Takwin",
+				"url": "https://takwin.slk.is/",
+				"description": "Contributed to learning paths, matn and lesson pages, progress, notes, questions, cards, and quizzes."
+			}
 		]
 	}
 }

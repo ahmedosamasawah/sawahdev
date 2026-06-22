@@ -17,13 +17,41 @@
 		],
 		"featuredProjectsTitle": "مشاريع شاركت في بنائها",
 		"featuredProjects": [
-			{ "name": "Quran.com", "url": "https://quran.com/" },
-			{ "name": "Dalail Academy", "url": "https://academy.dalail.net/" },
-			{ "name": "Tafsir", "url": "https://tafsir.app/" },
-			{ "name": "Muqri", "url": "https://en.muqri.com/" },
-			{ "name": "Tools", "url": "https://tools.slk.is/" },
-			{ "name": "Nadira", "url": "https://www.nadira-eg.com/" },
-			{ "name": "Takwin", "url": "https://takwin.slk.is/" }
+			{
+				"name": "Quran.com",
+				"url": "https://quran.com/",
+				"description": "شاركت في بناء الدروس التفاعلية، آيات الدروس، البطاقات، الاختبارات، المقالات، الموضوعات القرآنية، وتجارب التعلّم."
+			},
+			{
+				"name": "Dalail Academy",
+				"url": "https://academy.dalail.net/",
+				"description": "شاركت في بناء لوحات الإدارة، إدارة الطلاب، الاستبانات، الرسائل، التقارير، التحليلات، وتصدير البيانات."
+			},
+			{
+				"name": "Tafsir",
+				"url": "https://tafsir.app/",
+				"description": "شاركت في تحسين تجربة المصحف والبحث، عرض المصادر، أدوات التفسير، واجهة الهاتف، وبعض أعمال الاستيراد وتنظيم البيانات."
+			},
+			{
+				"name": "Muqri",
+				"url": "https://en.muqri.com/",
+				"description": "شاركت في تحسين المشغّل، تكرار الآيات، مزامنة التقدّم، إعدادات القراءة والاستماع، وتجربة الهاتف وiOS."
+			},
+			{
+				"name": "Tools",
+				"url": "https://tools.slk.is/",
+				"description": "شاركت في بناء أدوات النص العربي والقرآن، إعدادات المصحف، نسخ الآيات، أدوات الصوت، وبعض تكاملات الذكاء الاصطناعي."
+			},
+			{
+				"name": "Nadira",
+				"url": "https://www.nadira-eg.com/",
+				"description": "وفقت لبناء الموقع كاملًا."
+			},
+			{
+				"name": "Takwin",
+				"url": "https://takwin.slk.is/",
+				"description": "شاركت في بناء مسارات التعلّم، صفحات المتون والدروس، التقدّم، الملاحظات، الأسئلة، البطاقات، والاختبارات."
+			}
 		]
 	}
 }

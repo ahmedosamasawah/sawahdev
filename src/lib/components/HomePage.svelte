@@ -5,9 +5,10 @@
 
 	const now_items = $derived(messages[locale as Locale].home.now);
 	const featured_projects = $derived(messages[locale as Locale].home.featuredProjects);
+	let selected_project_url = $state('');
 </script>
 
-<div class="w-full max-w-3xl space-y-10">
+<div class="w-full max-w-3xl space-y-10 {locale === 'en' ? 'pt-8 sm:pt-10' : ''}">
 	<section class="space-y-6">
 		<div class="space-y-3">
 			<h1 class="text-3xl leading-tight font-semibold">
@@ -42,10 +43,31 @@
 						href={project.url}
 						target="_blank"
 						rel="noreferrer"
-						class="border-border/80 bg-background/50 hover:border-primary/40 hover:text-foreground inline-flex rounded-md border px-3 py-1.5 transition-colors"
+						class={[
+							'border-border/80 bg-background/50 hover:border-primary/40 hover:text-foreground inline-flex rounded-md border px-3 py-1.5 transition-colors',
+							selected_project_url === project.url &&
+								'border-primary/40 bg-primary/10 text-foreground'
+						]}
+						onpointerenter={() => (selected_project_url = project.url)}
+						onfocus={() => (selected_project_url = project.url)}
 					>
 						{project.name}
 					</a>
+				{/each}
+			</div>
+
+			<div class="grid text-sm leading-relaxed">
+				{#each featured_projects as project (project.url)}
+					<div
+						class={[
+							'border-border/80 bg-background/50 col-start-1 row-start-1 rounded-md border px-4 py-3 transition-opacity',
+							selected_project_url === project.url ? 'opacity-100' : 'pointer-events-none opacity-0'
+						]}
+						aria-hidden={selected_project_url !== project.url}
+					>
+						<p class="text-foreground font-medium">{project.name}</p>
+						<p class="text-muted-foreground mt-1">{project.description}</p>
+					</div>
 				{/each}
 			</div>
 		</section>

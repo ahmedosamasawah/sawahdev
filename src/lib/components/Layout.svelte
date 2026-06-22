@@ -31,9 +31,7 @@
 		{@render children()}
 	</main>
 
-	<footer
-		class="text-muted-foreground flex flex-col items-center gap-4 px-6 py-8 text-sm sm:flex-row sm:justify-between"
-	>
+	<footer class="text-muted-foreground flex items-center justify-between gap-4 px-6 py-8 text-sm">
 		<div class="flex items-center gap-5">
 			<a
 				href="https://github.com/ahmedosamasawah"
