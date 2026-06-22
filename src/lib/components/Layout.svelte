@@ -2,6 +2,7 @@
 	import Decoration from '$lib/components/Decoration.svelte';
 	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
 	import { base_url, translate } from '$lib/i18n/runtime';
+	import { resume_url } from '$lib/links';
 
 	const { locale, children } = $props();
 </script>
@@ -35,7 +36,7 @@
 	>
 		<div class="flex items-center gap-6">
 			<a
-				href="https://github.com/AhmedOsamaDev"
+				href="https://github.com/ahmedosamasawah"
 				class="text-muted-foreground hover:text-foreground transition-all hover:scale-110"
 				target="_blank"
 				rel="noopener"
@@ -44,7 +45,7 @@
 				<img src="{base_url}github.svg" alt="GitHub" class="h-6 w-6" />
 			</a>
 			<a
-				href="https://www.linkedin.com/in/ahmedosamadev"
+				href="https://www.linkedin.com/in/ahmedossamasawah/"
 				class="text-muted-foreground hover:text-foreground transition-all hover:scale-110"
 				target="_blank"
 				rel="noopener"
@@ -54,12 +55,13 @@
 			</a>
 		</div>
 		<a
-			href="https://github.com/AhmedOsamaDev/portfolio"
-			class="hover:text-foreground"
+			href={resume_url}
+			class="border-primary/30 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 font-semibold transition-colors"
 			target="_blank"
 			rel="noopener noreferrer"
 		>
-			{translate(locale, 'common.footer.sourceCode')}
+			{translate(locale, 'common.footer.resume')}
+			<span aria-hidden="true">↗</span>
 		</a>
 	</footer>
 </div>

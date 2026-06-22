@@ -1,63 +1,28 @@
 {
 	"common": {
-		"siteTitle": "Ahmed Osama | Software Engineer",
-		"backArrow": "←",
-		"nav": {
-			"home": "Home",
-			"projects": "Projects",
-			"blog": "Blog",
-			"about": "About"
-		},
+		"siteTitle": "Ahmed Osama | SWE",
 		"footer": {
-			"sourceCode": "Source code"
+			"resume": "Resume"
 		}
 	},
 	"home": {
-		"greeting": "hey, I'm Ahmed 👋",
-		"intro": "I am a Software Engineer building reliable web products. I work with Svelte and TypeScript. I design clear user experiences and write about practical web development.",
-		"nowTitle": "Now",
+		"greeting": "Glad you’re here — I’m Ahmed Al-Sawah.",
+		"intro": "I’m a software engineer focused mainly on frontend development. I build real web products with tools like Svelte, React, and Next.js.",
+		"nowTitle": "Right now",
 		"now": [
-			"Building a custom Svelte 5 static site generator with bilingual support",
-			"Exploring performance optimization patterns in modern web apps",
-			"Writing about practical web development and architecture decisions"
+			"I work at Quran.com as a Frontend Developer, where I help turn Quranic and educational content from CMS-managed material into actual product experiences: lessons, interactive ayah widgets, review cards, and quizzes.",
+			"I also work at Nuqayah.com as a Software Engineer, contributing to products that mostly serve education, Arabic text, and Quranic content. My work there spans learning platforms, admin dashboards, Mushaf and Tafsir tools, audio transcription, and font analysis, depending on what the project needs — frontend, backend, CMS work, or application QA.",
+			"I’m in my final year of studying Computer Science at UoPeople.edu, and I recently completed my studies in Educational Technology at Al-Azhar University. That mix of software and education has naturally shaped the kind of projects I’m drawn to."
 		],
-		"recentPostsTitle": "Recent Posts"
-	},
-	"projects": {
-		"title": "Projects",
-		"subtitle": "A selection of work I've built over the years.",
-		"viewProject": "View project",
-		"viewDetails": "View details",
-		"viewGithub": "View on GitHub",
-		"notFound": "Project not found."
-	},
-	"project": {
-		"overview": "Overview",
-		"challenge": "Challenge",
-		"solution": "Solution",
-		"results": "Results",
-		"gallery": "Gallery"
-	},
-	"blog": {
-		"title": "Blog",
-		"subtitle": "Technical notes and thoughts from day-to-day development.",
-		"noPosts": "No posts yet.",
-		"postNotFound": "Post not found.",
-		"fallbackNotice": "This article is only available in the default language. Showing the original version.",
-		"tags": "Tags",
-		"toc": "Table of contents",
-		"prevSection": "Previous",
-		"nextSection": "Next",
-		"prevArrow": "←",
-		"nextArrow": "→"
-	},
-	"about": {
-		"title": "About Me",
-		"subtitle": "A software engineer who values clarity, maintainability, and real-world problem-solving.",
-		"body": [
-			"I focus on building clear, maintainable web products with Svelte and small tooling.",
-			"Recent work includes a custom static site generator, bilingual portfolios, and performance audits.",
-			"I like simple stacks, explicit manifests, and shipping without surprise magic."
+		"featuredProjectsTitle": "Projects I contributed to",
+		"featuredProjects": [
+			{ "name": "Quran.com", "url": "https://quran.com/" },
+			{ "name": "Dalail Academy", "url": "https://academy.dalail.net/" },
+			{ "name": "Tafsir", "url": "https://tafsir.app/" },
+			{ "name": "Muqri", "url": "https://en.muqri.com/" },
+			{ "name": "Tools", "url": "https://tools.slk.is/" },
+			{ "name": "Nadira", "url": "https://www.nadira-eg.com/" },
+			{ "name": "Takwin", "url": "https://takwin.slk.is/" }
 		]
 	}
 }
