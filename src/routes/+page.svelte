@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { base_url } from '$lib/i18n/runtime';
-	import { absolute_url } from '$lib/seo';
+	import Seo from '$lib/components/Seo.svelte';
+	import { build_home_seo } from '$lib/seo';
 
 	const default_path = `${base_url}en/`;
-	const canonical = absolute_url('/en/');
+	const seo = build_home_seo('en');
 </script>
 
+<Seo {seo} />
+
 <svelte:head>
-	<title>Ahmed Osama – Portfolio</title>
 	<meta http-equiv="refresh" content="0; url={default_path}" />
-	<link rel="canonical" href={canonical} />
 </svelte:head>

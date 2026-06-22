@@ -4,6 +4,8 @@ type SeoData = {
 	title: string;
 	description: string;
 	canonical: string;
+	image: string;
+	image_alt: string;
 	locale: Locale;
 	alternates: {
 		hreflang: Locale | 'x-default';
@@ -25,11 +27,15 @@ function localized_path(locale: Locale) {
 function build_home_seo(locale: Locale): SeoData {
 	const title = messages[locale].common.siteTitle;
 	const description = messages[locale].home.intro;
+	const image_alt =
+		locale === 'ar' ? 'بطاقة تعريفية لأحمد السواح' : 'Ahmed Al-Sawah portfolio preview';
 
 	return {
 		title,
 		description,
 		canonical: absolute_url(localized_path(locale)),
+		image: absolute_url(`/og-${locale}.png`),
+		image_alt,
 		locale,
 		alternates: [
 			...locales.map((hreflang) => ({
