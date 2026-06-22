@@ -32,12 +32,12 @@
 	</main>
 
 	<footer
-		class="text-muted-foreground flex flex-wrap items-center justify-between gap-4 px-6 py-8 text-sm"
+		class="text-muted-foreground flex flex-col items-center gap-4 px-6 py-8 text-sm sm:flex-row sm:justify-between"
 	>
-		<div class="flex items-center gap-6">
+		<div class="flex items-center gap-5">
 			<a
 				href="https://github.com/ahmedosamasawah"
-				class="text-muted-foreground hover:text-foreground transition-all hover:scale-110"
+				class="text-muted-foreground hover:text-foreground rounded-md p-1 transition-all hover:scale-110"
 				target="_blank"
 				rel="noopener"
 				aria-label="GitHub"
@@ -46,7 +46,7 @@
 			</a>
 			<a
 				href="https://www.linkedin.com/in/ahmedossamasawah/"
-				class="text-muted-foreground hover:text-foreground transition-all hover:scale-110"
+				class="text-muted-foreground hover:text-foreground rounded-md p-1 transition-all hover:scale-110"
 				target="_blank"
 				rel="noopener"
 				aria-label="LinkedIn"

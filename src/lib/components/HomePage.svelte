@@ -36,9 +36,14 @@
 			<h2 class="text-primary text-xs font-semibold tracking-[0.2em] uppercase">
 				{translate(locale, 'home.featuredProjectsTitle')}
 			</h2>
-			<div class="flex flex-wrap gap-x-5 gap-y-2 text-sm leading-relaxed">
+			<div class="flex flex-wrap gap-2 text-sm leading-relaxed">
 				{#each featured_projects as project (project.url)}
-					<a href={project.url} target="_blank" rel="noreferrer" class="link">
+					<a
+						href={project.url}
+						target="_blank"
+						rel="noreferrer"
+						class="border-border/80 bg-background/50 hover:border-primary/40 hover:text-foreground inline-flex rounded-md border px-3 py-1.5 transition-colors"
+					>
 						{project.name}
 					</a>
 				{/each}
